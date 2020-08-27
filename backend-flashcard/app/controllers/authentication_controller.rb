@@ -4,9 +4,9 @@ class AuthenticationController < ApplicationController
         user = User.find_by({ username: params[:username]})
         if(user && user.authenticate(params[:password]))
             session[:user_id] = user.id
-            render json: { success: true, id: user.id }
+            render json: { success: true, user: user }
         else
-            render json: { success: false, id: nil }
+            render json: { success: false, user: nil }
         end
     end
 
@@ -14,9 +14,9 @@ class AuthenticationController < ApplicationController
     def is_logged_in
         if session[:user_id]
             current_user = User.find(session[:user_id])
-            render json: { success: true, id: current_user.id }
+            render json: { success: true, user: current_user }
         else
-            render json: { success: false, id: nil }
+            render json: { success: false, user: nil }
         end
     end
 

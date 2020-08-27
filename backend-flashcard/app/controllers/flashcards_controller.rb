@@ -1,7 +1,7 @@
 class FlashcardsController < ApplicationController
 
     def index
-        @flashcards = Flashcards.all
+        @flashcards = Flashcard.all
         render json: @flashcards
     end
 
