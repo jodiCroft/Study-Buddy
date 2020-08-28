@@ -74,9 +74,9 @@ class App extends React.Component {
         }),
       })
         .then((res) => res.json())
-        .then((cardset) =>
-          this.setState({ cardsets: [...this.state.cardsets, cardset] })
-        );
+        .then((cardset) => {
+          this.setState({ cardsets: [...this.state.cardsets, cardset] });
+        });
     }
   };
   render() {

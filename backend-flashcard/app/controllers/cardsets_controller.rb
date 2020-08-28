@@ -5,7 +5,7 @@ class CardsetsController < ApplicationController
     end
     
     def create
-      byebug
+      
         if(params[:user_id].to_i == session[:user_id])
             @cardset = Cardset.create({title:params[:title], subject:params[:subject], access:"public", description:params[:description]})
             render json: @cardset
