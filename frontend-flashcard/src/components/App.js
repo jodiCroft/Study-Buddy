@@ -40,7 +40,9 @@ class App extends React.Component {
       }),
     })
       .then((res) => res.json())
-      .then((user) => this.setState({ currentUser: user }));
+      .then((user) => {
+        this.setState({ currentUser: user.user });
+      });
   };
 
   handleLogout = () => {
@@ -55,35 +57,34 @@ class App extends React.Component {
 
   handleCreate = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/cardsets", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        title: e.target.title.value,
-        subject: e.target.subject.value,
-        description: e.target.description.value,
-        flashcards: [
-          {
-            front: e.target.front.value,
-            back: e.target.back.value,
-            hint: e.target.hint.value,
-          },
-        ],
-      }),
-    })
-      .then((res) => res.json())
-      .then((cardset) =>
-        this.setState({ cardSet: [...this.state.cardSet, cardset] })
-      );
+    console.log(this.state.currentUser.id);
+    if (this.state.currentUser.id) {
+      fetch("http://localhost:3000/cardsets", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          user_id: this.state.currentUser.id,
+          title: e.target.title.value,
+          subject: e.target.subject.value,
+          description: e.target.description.value,
+        }),
+      })
+        .then((res) => res.json())
+        .then((cardset) =>
+          this.setState({ cardsets: [...this.state.cardsets, cardset] })
+        );
+    }
   };
   render() {
+    console.log(this.state.currentUser);
     return (
       <div>
         <h1>Flashcard Generator App</h1>
+
         <h3>Create a New Flashcard Set</h3>
         {/* TEST FORM FOR CREATE FLASHCARDS: */}
         <div>
