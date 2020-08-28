@@ -1,5 +1,9 @@
 import React from "react";
+import CreateSet from "./CreateSet";
+import CreateCards from "./CreateCards";
+import Main from "./Main";
 import Header from "./Header";
+import { Route, withRouter, Link } from "react-router-dom";
 
 import "../App.css";
 import { render } from "react-dom";
@@ -22,42 +26,44 @@ class App extends React.Component {
         if (response.success === true) {
           this.setState({ currentUser: response.user });
         }
+        console.log(this.state.currentUser);
+        this.props.history.push(`/main`);
       });
   }
 
-  handleLogin = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value,
-      }),
-    })
-      .then((res) => res.json())
-      .then((user) => {
-        this.setState({ currentUser: user.user });
-      });
-  };
+  // handleLogin = (e) => {
+  //   e.preventDefault();
+  //   fetch("http://localhost:3000/login", {
+  //     method: "POST",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       username: e.target.username.value,
+  //       password: e.target.password.value,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((user) => {
+  //       this.setState({ currentUser: user.user });
+  //     });
+  // };
 
-  handleLogout = () => {
-    fetch("http://localhost:3000/logout", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(this.setState({ currentUser: "" }));
-  };
+  // handleLogout = () => {
+  //   fetch("http://localhost:3000/logout", {
+  //     method: "POST",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   }).then(this.setState({ currentUser: "" }));
+  // };
 
-  handleCreate = (e) => {
+  createCardSet = (e) => {
     e.preventDefault();
-    console.log(this.state.currentUser.id);
+
     if (this.state.currentUser.id) {
       fetch("http://localhost:3000/cardsets", {
         method: "POST",
@@ -76,18 +82,32 @@ class App extends React.Component {
         .then((res) => res.json())
         .then((cardset) => {
           this.setState({ cardsets: [...this.state.cardsets, cardset] });
+          this.props.history.push(`/cardset/${cardset.id}/createcards`);
         });
     }
   };
   render() {
-    console.log(this.state.currentUser);
     return (
       <div>
         <h1>Flashcard Generator App</h1>
+        <Route path="/main" component={() => <Main />} />
 
-        <h3>Create a New Flashcard Set</h3>
+        <Route
+          path="/cardset/create"
+          component={() => (
+            <CreateSet
+              currentUser={this.state.currentUser}
+              createCardSet={this.createCardSet}
+            />
+          )}
+        />
+        <Route
+          path={`/cardset/:id/createcards`}
+          component={() => <CreateCards />}
+        />
+
         {/* TEST FORM FOR CREATE FLASHCARDS: */}
-        <div>
+        {/* <div>
           <form onSubmit={(e) => this.handleCreate(e)} className="CreateSet">
             <label>
               Set Title:
@@ -123,10 +143,10 @@ class App extends React.Component {
             <input type="submit" value="Log In" />
           </form>
           <button onClick={this.handleLogout}>Log Out</button>
-        </div>
+        </div> */}
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
