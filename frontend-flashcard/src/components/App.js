@@ -1,8 +1,9 @@
 import React from "react";
 import CreateSet from "./CreateSet";
 import CreateCards from "./CreateCards";
-import Main from "./Main";
+import Home from "./Home";
 import Header from "./Header";
+import Login from "./Login";
 import { Route, withRouter, Link } from "react-router-dom";
 
 import "../App.css";
@@ -27,7 +28,7 @@ class App extends React.Component {
           this.setState({ currentUser: response.user });
         }
         console.log(this.state.currentUser);
-        this.props.history.push(`/main`);
+        this.props.history.push(`/home`);
       });
   }
 
@@ -51,15 +52,15 @@ class App extends React.Component {
   //     });
   // };
 
-  // handleLogout = () => {
-  //   fetch("http://localhost:3000/logout", {
-  //     method: "POST",
-  //     credentials: "include",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   }).then(this.setState({ currentUser: "" }));
-  // };
+  handleLogout = () => {
+    fetch("http://localhost:3000/logout", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(this.setState({ currentUser: "" }));
+  };
 
   createCardSet = (e) => {
     e.preventDefault();
@@ -84,13 +85,35 @@ class App extends React.Component {
           this.setState({ cardsets: [...this.state.cardsets, cardset] });
           this.props.history.push(`/cardset/${cardset.id}/createcards`);
         });
-    }
+    } else this.props.history.push("/login");
   };
+
+  // isLoggedIn = () => {
+  //   if (!this.state.currentUser.id) {
+  //     this.props.history.push("/login");
+  //   }
+  // };
+
+  // handleCurrentUser = () => {
+  //   if (this.state.currentUser.id) {
+  //     this.handleLogout();
+  //   } else this.props.history.push("/login");
+  // };
   render() {
     return (
       <div>
-        <h1>Flashcard Generator App</h1>
-        <Route path="/main" component={() => <Main />} />
+        <Header
+          currentUser={this.state.currentUser}
+          // handleCurrentUser={this.handleCurrentUser}
+        />
+        <Route
+          path="/home"
+          component={() => <Home currentUser={this.state.currentUser} />}
+        />
+        <Route
+          path="/login"
+          component={() => <Login handleLogin={this.handleLogin} />}
+        />
 
         <Route
           path="/cardset/create"

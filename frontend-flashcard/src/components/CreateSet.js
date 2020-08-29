@@ -1,24 +1,30 @@
 import React, { useState, Component } from "react";
+import { Form, Button, Divider } from "semantic-ui-react";
 const CreateSet = (props) => {
   return (
     <div>
       <div>
-        <form onSubmit={(e) => props.createCardSet(e)} className="CreateSet">
-          <label>
-            Set Title:
-            <input type="text" name="title" />
-          </label>
-          <label>
-            Description:
-            <input type="text" name="description" />
-          </label>
-          <label>
-            Subject:
-            <input type="text" name="subject" />
-          </label>
-
-          <input type="submit" value="Continue" />
-        </form>
+        <Form
+          size="massive"
+          onSubmit={(e) => props.createCardSet(e)}
+          className="CreateSet"
+        >
+          <Form.Group widths="equal">
+            <Form.Field
+              label="Cardset title"
+              control="input"
+              placeholder="title..."
+            />
+            <Form.Field label="Subject" control="input" placeholder="biology" />
+            <Form.Field
+              label="Description"
+              control="input"
+              placeholder="description..."
+            />
+          </Form.Group>
+          <Button type="submit">Submit</Button>
+          <Divider hidden />
+        </Form>
       </div>
     </div>
   );
