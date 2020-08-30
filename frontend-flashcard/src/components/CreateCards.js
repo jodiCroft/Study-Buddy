@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
+import { Table } from "semantic-ui-react";
+
 const CreateCards = (props) => {
   const params = useParams();
   console.log(params);
@@ -30,15 +32,41 @@ const CreateCards = (props) => {
   return (
     <div>
       <div>
-        <form onSubmit={(e) => createFlashcards(e)}>
-          <h4>Front:</h4>
-          <textarea name="front"></textarea>
-          <h4>Back:</h4>
-          <textarea name="back"></textarea>
-          <h4>Hint:</h4>
-          <textarea name="hint"></textarea>
-          <input type="submit" value="Continue" />
-        </form>
+        <Table basic>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Front</Table.HeaderCell>
+              <Table.HeaderCell>Back</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>
+                <textarea></textarea>
+              </Table.Cell>
+              <Table.Cell>
+                <textarea></textarea>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>
+                <textarea></textarea>
+              </Table.Cell>
+              <Table.Cell>
+                <textarea></textarea>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>
+                <textarea></textarea>
+              </Table.Cell>
+              <Table.Cell>
+                <textarea></textarea>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
       </div>
     </div>
   );
