@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { Component } from "react";
 import { useParams } from "react-router-dom";
 const CreateCards = (props) => {
   const params = useParams();

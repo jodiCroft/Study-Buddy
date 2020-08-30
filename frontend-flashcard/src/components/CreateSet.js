@@ -1,12 +1,15 @@
 import React, { useState, Component } from "react";
 import { Form, Button, Divider } from "semantic-ui-react";
+
 const CreateSet = (props) => {
   return (
     <div>
       <div>
         <Form
           size="massive"
-          onSubmit={(e) => props.createCardSet(e)}
+          onSubmit={(e) => {
+            props.createCardSet(e);
+          }}
           className="CreateSet"
         >
           <Form.Group widths="equal">
@@ -22,6 +25,7 @@ const CreateSet = (props) => {
               placeholder="description..."
             />
           </Form.Group>
+
           <Button type="submit">Submit</Button>
           <Divider hidden />
         </Form>

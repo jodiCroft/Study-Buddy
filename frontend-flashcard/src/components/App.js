@@ -32,25 +32,25 @@ class App extends React.Component {
       });
   }
 
-  // handleLogin = (e) => {
-  //   e.preventDefault();
-  //   fetch("http://localhost:3000/login", {
-  //     method: "POST",
-  //     credentials: "include",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       username: e.target.username.value,
-  //       password: e.target.password.value,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((user) => {
-  //       this.setState({ currentUser: user.user });
-  //     });
-  // };
+  handleLogin = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        username: e.target.username.value,
+        password: e.target.password.value,
+      }),
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        this.setState({ currentUser: user.user });
+      });
+  };
 
   handleLogout = () => {
     fetch("http://localhost:3000/logout", {
@@ -85,7 +85,8 @@ class App extends React.Component {
           this.setState({ cardsets: [...this.state.cardsets, cardset] });
           this.props.history.push(`/cardset/${cardset.id}/createcards`);
         });
-    } else this.props.history.push("/login");
+    }
+    // else this.props.history.push("/login");
   };
 
   // isLoggedIn = () => {
@@ -94,22 +95,18 @@ class App extends React.Component {
   //   }
   // };
 
-  // handleCurrentUser = () => {
-  //   if (this.state.currentUser.id) {
-  //     this.handleLogout();
-  //   } else this.props.history.push("/login");
-  // };
   render() {
     return (
       <div>
         <Header
           currentUser={this.state.currentUser}
-          // handleCurrentUser={this.handleCurrentUser}
+          handleLogout={this.handleLogout}
         />
         <Route
           path="/home"
           component={() => <Home currentUser={this.state.currentUser} />}
         />
+
         <Route
           path="/login"
           component={() => <Login handleLogin={this.handleLogin} />}

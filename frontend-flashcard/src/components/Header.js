@@ -1,7 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Input, Menu, Image } from "semantic-ui-react";
 
 const Header = (props) => {
+  const { push } = useHistory();
   return (
     <div>
       <Menu secondary>
@@ -21,10 +23,13 @@ const Header = (props) => {
           <Menu.Item>
             <Input icon="search" placeholder="Search Flashcards..." />
           </Menu.Item>
+
           <Menu.Item
             name={!props.currentUser.id ? "sign in" : "log out"}
             // active={activeItem === "logout"}
-            onClick={() => console.log(props.currentUser)}
+            onClick={() => {
+              props.currentUser.id ? props.handleLogout() : push("/login");
+            }}
           />
         </Menu.Menu>
       </Menu>
