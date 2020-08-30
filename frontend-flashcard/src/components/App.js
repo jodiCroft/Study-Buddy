@@ -85,9 +85,25 @@ class App extends React.Component {
         .then((cardset) => {
           this.setState({ cardsets: [...this.state.cardsets, cardset] });
           this.props.history.push(`/cardset/${cardset.id}/createcards`);
+          this.postToUserCardsets(cardset.id);
         });
     }
     // else this.props.history.push("/login");
+  };
+
+  postToUserCardsets = (id) => {
+    fetch("http://localhost:3000/user_cardsets", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        user_id: this.state.currentUser.id,
+        cardset_id: id,
+      }),
+    });
   };
 
   // isLoggedIn = () => {
@@ -115,7 +131,12 @@ class App extends React.Component {
 
         <Route
           path="/my-index"
-          component={() => <MyIndex currentUser={this.state.currentUser} />}
+          component={() => (
+            <MyIndex
+              currentUser={this.state.currentUser}
+              cardsets={this.state.cardsets}
+            />
+          )}
         />
 
         <Route
