@@ -6,10 +6,17 @@ class FlashcardsController < ApplicationController
     end
 
     def create
-    #      t.string "front"
-    # t.string "back"
-    # t.string "hint"
-    # t.integer "cardset_id"
+
+        @flashcard = Flashcard.new({front:params[:front], back:params[:back], hint:params[:hint], cardset_id:params[:cardset_id]})
+        if @flashcard.valid?
+            @flashcard.save 
+            render json: @flashcard
+        else
+            render json: {
+                message: @flashcard.errors.messages
+            }
+        end
+ 
         
     end
    

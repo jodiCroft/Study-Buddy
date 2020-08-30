@@ -1,5 +1,10 @@
 import React from "react";
+import CreateSet from "./CreateSet";
+import CreateCards from "./CreateCards";
+import Home from "./Home";
 import Header from "./Header";
+import Login from "./Login";
+import { Route, withRouter, Link } from "react-router-dom";
 
 import "../App.css";
 import { render } from "react-dom";
@@ -22,6 +27,8 @@ class App extends React.Component {
         if (response.success === true) {
           this.setState({ currentUser: response.user });
         }
+        console.log(this.state.currentUser);
+        this.props.history.push(`/home`);
       });
   }
 
@@ -40,7 +47,9 @@ class App extends React.Component {
       }),
     })
       .then((res) => res.json())
-      .then((user) => this.setState({ currentUser: user }));
+      .then((user) => {
+        this.setState({ currentUser: user.user });
+      });
   };
 
   handleLogout = () => {
@@ -53,40 +62,72 @@ class App extends React.Component {
     }).then(this.setState({ currentUser: "" }));
   };
 
-  handleCreate = (e) => {
+  createCardSet = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/cardsets", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        title: e.target.title.value,
-        subject: e.target.subject.value,
-        description: e.target.description.value,
-        flashcards: [
-          {
-            front: e.target.front.value,
-            back: e.target.back.value,
-            hint: e.target.hint.value,
-          },
-        ],
-      }),
-    })
-      .then((res) => res.json())
-      .then((cardset) =>
-        this.setState({ cardSet: [...this.state.cardSet, cardset] })
-      );
+
+    if (this.state.currentUser.id) {
+      fetch("http://localhost:3000/cardsets", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          user_id: this.state.currentUser.id,
+          title: e.target.title.value,
+          subject: e.target.subject.value,
+          description: e.target.description.value,
+        }),
+      })
+        .then((res) => res.json())
+        .then((cardset) => {
+          this.setState({ cardsets: [...this.state.cardsets, cardset] });
+          this.props.history.push(`/cardset/${cardset.id}/createcards`);
+        });
+    }
+    // else this.props.history.push("/login");
   };
+
+  // isLoggedIn = () => {
+  //   if (!this.state.currentUser.id) {
+  //     this.props.history.push("/login");
+  //   }
+  // };
+
   render() {
     return (
       <div>
-        <h1>Flashcard Generator App</h1>
-        <h3>Create a New Flashcard Set</h3>
+        <Header
+          currentUser={this.state.currentUser}
+          handleLogout={this.handleLogout}
+        />
+        <Route
+          path="/home"
+          component={() => <Home currentUser={this.state.currentUser} />}
+        />
+
+        <Route
+          path="/login"
+          component={() => <Login handleLogin={this.handleLogin} />}
+        />
+
+        <Route
+          path="/cardset/create"
+          component={() => (
+            <CreateSet
+              currentUser={this.state.currentUser}
+              createCardSet={this.createCardSet}
+            />
+          )}
+        />
+        <Route
+          path={`/cardset/:id/createcards`}
+          component={() => <CreateCards />}
+        />
+
         {/* TEST FORM FOR CREATE FLASHCARDS: */}
-        <div>
+        {/* <div>
           <form onSubmit={(e) => this.handleCreate(e)} className="CreateSet">
             <label>
               Set Title:
@@ -122,10 +163,10 @@ class App extends React.Component {
             <input type="submit" value="Log In" />
           </form>
           <button onClick={this.handleLogout}>Log Out</button>
-        </div>
+        </div> */}
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
