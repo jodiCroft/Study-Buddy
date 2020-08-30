@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
-import { Table } from "semantic-ui-react";
+import { Table, Button, Form } from "semantic-ui-react";
+import CardPair from "./CardPair";
 
 const CreateCards = (props) => {
   const params = useParams();
   console.log(params);
 
+  const cancelCardset = (params) => {
+    fetch(`http://localhost:3000/cardsets/${params.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+
   const createFlashcards = (e) => {
     e.preventDefault();
+    console.log(e.target.frontText.value);
 
     {
       fetch("http://localhost:3000/flashcards", {
@@ -19,9 +28,8 @@ const CreateCards = (props) => {
         },
         body: JSON.stringify({
           cardset_id: params.id,
-          front: e.target.front.value,
-          back: e.target.back.value,
-          hint: e.target.hint.value,
+          front: e.target.frontText.value,
+          back: e.target.backText.value,
         }),
       })
         .then((res) => res.json())
@@ -32,42 +40,42 @@ const CreateCards = (props) => {
   return (
     <div>
       <div>
-        <Table basic>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Front</Table.HeaderCell>
-              <Table.HeaderCell>Back</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
+        <Form onSubmit={(e) => createFlashcards(e)}>
+          <Table basic>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Front</Table.HeaderCell>
+                <Table.HeaderCell>Back</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
 
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>
-                <textarea></textarea>
-              </Table.Cell>
-              <Table.Cell>
-                <textarea></textarea>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <textarea></textarea>
-              </Table.Cell>
-              <Table.Cell>
-                <textarea></textarea>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <textarea></textarea>
-              </Table.Cell>
-              <Table.Cell>
-                <textarea></textarea>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell className="front-card">
+                  <Form.Field
+                    control="textarea"
+                    placeholder="front card text"
+                    name="frontText"
+                  />
+                </Table.Cell>
+                <Table.Cell className="back-card">
+                  <Form.Field
+                    control="textarea"
+                    placeholder="back card text"
+                    name="backText"
+                  />
+                </Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table>
+          <Button positive type="submit">
+            Create Cards
+          </Button>
+        </Form>
       </div>
+      <Button negative onClick={() => cancelCardset(params)}>
+        Cancel
+      </Button>
     </div>
   );
 };

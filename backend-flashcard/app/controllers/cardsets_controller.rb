@@ -34,6 +34,8 @@ class CardsetsController < ApplicationController
     end
 
     def destroy
+      @cardset = Cardset.find(params[:id])
+      @cardset.destroy
     end
 
     

@@ -21,8 +21,16 @@ const Header = (props) => {
 
         <Menu.Menu position="right">
           <Menu.Item>
-            <Input icon="search" placeholder="Search Flashcards..." />
+            <Input icon="search" placeholder="Search All Flashcards..." />
           </Menu.Item>
+          {props.currentUser.id ? (
+            <Menu.Item
+              name="My Card Sets"
+              onClick={() => {
+                push("/my-index");
+              }}
+            />
+          ) : null}
 
           <Menu.Item
             name={!props.currentUser.id ? "sign in" : "log out"}

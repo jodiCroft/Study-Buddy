@@ -4,6 +4,7 @@ import CreateCards from "./CreateCards";
 import Home from "./Home";
 import Header from "./Header";
 import Login from "./Login";
+import MyIndex from "./MyIndex";
 import { Route, withRouter, Link } from "react-router-dom";
 
 import "../App.css";
@@ -110,6 +111,11 @@ class App extends React.Component {
         <Route
           path="/login"
           component={() => <Login handleLogin={this.handleLogin} />}
+        />
+
+        <Route
+          path="/my-index"
+          component={() => <MyIndex currentUser={this.state.currentUser} />}
         />
 
         <Route
