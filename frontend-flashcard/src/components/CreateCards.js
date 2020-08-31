@@ -6,6 +6,7 @@ import CardPair from "./CardPair";
 
 const CreateCards = (props) => {
   const [cardPairs, setCardPairs] = useState([<CardPair />]);
+  const [cardData, setCardData] = useState([]);
   const params = useParams();
   console.log(params);
 
@@ -18,25 +19,31 @@ const CreateCards = (props) => {
 
   const createFlashcards = (e) => {
     e.preventDefault();
-    console.log(e.target.frontText.value);
+    console.log(cardPairs);
+    // cardPairs.map((cardPair) => {
+    //   setCardData([
+    //     ...cardData,
+    //     { front: e.target.frontText.value, back: e.target.backText.value },
+    //   ]);
+    // });
 
-    {
-      fetch("http://localhost:3000/flashcards", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          cardset_id: params.id,
-          front: e.target.frontText.value,
-          back: e.target.backText.value,
-        }),
-      })
-        .then((res) => res.json())
-        .then(console.log);
-    }
+    // {
+    //   fetch("http://localhost:3000/flashcards", {
+    //     method: "POST",
+    //     credentials: "include",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Accept: "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       cardset_id: params.id,
+    //       front: cardData.map((card) => card.front),
+    //       back: cardData.map((card) => card.back),
+    //     }),
+    //   })
+    //     .then((res) => res.json())
+    //     .then(console.log);
+    // }
   };
 
   return (
@@ -54,7 +61,17 @@ const CreateCards = (props) => {
             <Table.Body>{cardPairs}</Table.Body>
           </Table>
           <div>
-            <Button onClick={() => setCardPairs([...cardPairs, <CardPair />])}>
+            <Button
+              onClick={() =>
+                setCardPairs([
+                  ...cardPairs,
+                  <CardPair
+                    cardPairs={cardPairs}
+                    setCardPairs={setCardPairs}
+                  />,
+                ])
+              }
+            >
               Add more
             </Button>
           </div>

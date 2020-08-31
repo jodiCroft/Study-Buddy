@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Table, Form } from "semantic-ui-react";
+import { Table, Form, Button } from "semantic-ui-react";
 
-const CardPair = () => {
+const CardPair = (props) => {
   return (
     <div>
       <Table.Row>
@@ -20,6 +20,10 @@ const CardPair = () => {
             name="backText"
           />
         </Table.Cell>
+        <Button
+          icon="trash"
+          onClick={() => console.log("I need this to delete this card pair")}
+        />
       </Table.Row>
     </div>
   );
