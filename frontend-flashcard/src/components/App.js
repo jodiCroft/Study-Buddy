@@ -1,6 +1,6 @@
 import React from "react";
 import CreateSet from "./CreateSet";
-import CreateCards from "./CreateCards";
+import CardsContainer from "./CardsContainer";
 import Home from "./Home";
 import Header from "./Header";
 import Login from "./Login";
@@ -166,7 +166,7 @@ class App extends React.Component {
         />
         <Route
           path={`/cardset/:id/createcards`}
-          component={() => <CreateCards />}
+          component={() => <CardsContainer />}
         />
 
         {/* TEST FORM FOR CREATE FLASHCARDS: */}
