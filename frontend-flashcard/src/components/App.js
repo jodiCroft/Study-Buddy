@@ -5,6 +5,7 @@ import Home from "./Home";
 import Header from "./Header";
 import Login from "./Login";
 import MyIndex from "./MyIndex";
+import SignUp from "./SignUp";
 import { Route, withRouter, Link } from "react-router-dom";
 
 import "../App.css";
@@ -106,6 +107,11 @@ class App extends React.Component {
     });
   };
 
+  signUp = (e) => {
+    e.preventDefault();
+    // fetch POST to new user and then return that new user and send them to login to be auto logged in
+  };
+
   // isLoggedIn = () => {
   //   if (!this.state.currentUser.id) {
   //     this.props.history.push("/login");
@@ -122,6 +128,16 @@ class App extends React.Component {
         <Route
           path="/home"
           component={() => <Home currentUser={this.state.currentUser} />}
+        />
+
+        <Route
+          path="/sign-up"
+          component={() => (
+            <SignUp
+              currentUser={this.state.currentUser}
+              handleLogin={this.signUp}
+            />
+          )}
         />
 
         <Route

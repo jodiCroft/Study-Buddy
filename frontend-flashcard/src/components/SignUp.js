@@ -2,17 +2,29 @@ import React from "react";
 import { useState, useHistory } from "react-router-dom";
 import { Button, Form, Divider } from "semantic-ui-react";
 
-const Login = (props) => {
+const SignUp = (props) => {
   const { push } = useHistory();
   return (
     <div>
-      <Form size="medium" onSubmit={(e) => props.handleLogin(e)}>
+      <Form size="medium" onSubmit={(e) => props.signUp(e)}>
         <Form.Group>
+          <Form.Field
+            label="First Name"
+            name="firstName"
+            control="input"
+            placeholder="Joe"
+          />
+          <Form.Field
+            label="Last Name"
+            name="lastName"
+            control="input"
+            placeholder="Smith"
+          />
           <Form.Field
             label="Username"
             name="username"
             control="input"
-            placeholder="Username"
+            placeholder="joesmith1999"
           />
           <Form.Field
             label="Password"
@@ -22,21 +34,11 @@ const Login = (props) => {
             placeholder="password..."
           />
 
-          <Button type="submit">Login</Button>
-
-          <Divider hidden />
+          <Button type="submit">Sign Up</Button>
         </Form.Group>
-        Don't have an account?
-        <Button
-          onClick={() => {
-            push("/sign-up");
-          }}
-        >
-          Sign Up
-        </Button>
       </Form>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;

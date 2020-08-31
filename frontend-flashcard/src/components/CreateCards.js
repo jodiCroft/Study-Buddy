@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { Table, Button, Form } from "semantic-ui-react";
 import CardPair from "./CardPair";
 
 const CreateCards = (props) => {
+  const [cardPairs, setCardPairs] = useState([<CardPair />]);
   const params = useParams();
   console.log(params);
 
@@ -49,25 +51,13 @@ const CreateCards = (props) => {
               </Table.Row>
             </Table.Header>
 
-            <Table.Body>
-              <Table.Row>
-                <Table.Cell className="front-card">
-                  <Form.Field
-                    control="textarea"
-                    placeholder="front card text"
-                    name="frontText"
-                  />
-                </Table.Cell>
-                <Table.Cell className="back-card">
-                  <Form.Field
-                    control="textarea"
-                    placeholder="back card text"
-                    name="backText"
-                  />
-                </Table.Cell>
-              </Table.Row>
-            </Table.Body>
+            <Table.Body>{cardPairs}</Table.Body>
           </Table>
+          <div>
+            <Button onClick={() => setCardPairs([...cardPairs, <CardPair />])}>
+              Add more
+            </Button>
+          </div>
           <Button positive type="submit">
             Create Cards
           </Button>
