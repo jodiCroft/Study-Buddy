@@ -6,7 +6,8 @@ import Header from "./Header";
 import Login from "./Login";
 import MyIndex from "./MyIndex";
 import SignUp from "./SignUp";
-import { Route, withRouter, Link } from "react-router-dom";
+import ShowSet from "./ShowSet";
+import { Route, withRouter } from "react-router-dom";
 
 import "../App.css";
 import { render } from "react-dom";
@@ -86,26 +87,25 @@ class App extends React.Component {
         .then((cardset) => {
           this.setState({ cardsets: [...this.state.cardsets, cardset] });
           this.props.history.push(`/cardset/${cardset.id}/createcards`);
-          this.postToUserCardsets(cardset.id);
         });
     }
     // else this.props.history.push("/login");
   };
 
-  postToUserCardsets = (id) => {
-    fetch("http://localhost:3000/user_cardsets", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        user_id: this.state.currentUser.id,
-        cardset_id: id,
-      }),
-    });
-  };
+  // postToUserCardsets = (id) => {
+  //   fetch("http://localhost:3000/user_cardsets", {
+  //     method: "POST",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       user_id: this.state.currentUser.id,
+  //       cardset_id: id,
+  //     }),
+  //   });
+  // };
 
   signUp = (e) => {
     e.preventDefault();
@@ -154,6 +154,8 @@ class App extends React.Component {
             />
           )}
         />
+
+        <Route path={`/cardset/:id/show-set`} component={() => <ShowSet />} />
 
         <Route
           path="/cardset/create"
