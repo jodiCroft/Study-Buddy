@@ -2,6 +2,7 @@ class CardsetsController < ApplicationController
     def index
         @cardsets = Cardset.all
         render json: @cardsets, include: [:flashcards]
+        # Need to also include users - don't know how to do this ^^
     end
     
     def create
@@ -34,6 +35,8 @@ class CardsetsController < ApplicationController
     end
 
     def destroy
+      @cardset = Cardset.find(params[:id])
+      @cardset.destroy
     end
 
     

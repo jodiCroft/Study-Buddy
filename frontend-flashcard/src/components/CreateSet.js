@@ -17,12 +17,19 @@ const CreateSet = (props) => {
               label="Cardset title"
               control="input"
               placeholder="title..."
+              name="title"
             />
-            <Form.Field label="Subject" control="input" placeholder="biology" />
+            <Form.Field
+              label="Subject"
+              control="input"
+              placeholder="biology"
+              name="subject"
+            />
             <Form.Field
               label="Description"
               control="input"
               placeholder="description..."
+              name="description"
             />
           </Form.Group>
 

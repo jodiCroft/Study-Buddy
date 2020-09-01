@@ -1,10 +1,13 @@
 import React from "react";
 import CreateSet from "./CreateSet";
-import CreateCards from "./CreateCards";
+import CardsContainer from "./CardsContainer";
 import Home from "./Home";
 import Header from "./Header";
 import Login from "./Login";
-import { Route, withRouter, Link } from "react-router-dom";
+import MyIndex from "./MyIndex";
+import SignUp from "./SignUp";
+import ShowSet from "./ShowSet";
+import { Route, withRouter } from "react-router-dom";
 
 import "../App.css";
 import { render } from "react-dom";
@@ -89,6 +92,26 @@ class App extends React.Component {
     // else this.props.history.push("/login");
   };
 
+  // postToUserCardsets = (id) => {
+  //   fetch("http://localhost:3000/user_cardsets", {
+  //     method: "POST",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       user_id: this.state.currentUser.id,
+  //       cardset_id: id,
+  //     }),
+  //   });
+  // };
+
+  signUp = (e) => {
+    e.preventDefault();
+    // fetch POST to new user and then return that new user and send them to login to be auto logged in
+  };
+
   // isLoggedIn = () => {
   //   if (!this.state.currentUser.id) {
   //     this.props.history.push("/login");
@@ -108,9 +131,31 @@ class App extends React.Component {
         />
 
         <Route
+          path="/sign-up"
+          component={() => (
+            <SignUp
+              currentUser={this.state.currentUser}
+              handleLogin={this.signUp}
+            />
+          )}
+        />
+
+        <Route
           path="/login"
           component={() => <Login handleLogin={this.handleLogin} />}
         />
+
+        <Route
+          path="/my-index"
+          component={() => (
+            <MyIndex
+              currentUser={this.state.currentUser}
+              cardsets={this.state.cardsets}
+            />
+          )}
+        />
+
+        <Route path={`/cardset/:id/show-set`} component={() => <ShowSet />} />
 
         <Route
           path="/cardset/create"
@@ -123,7 +168,7 @@ class App extends React.Component {
         />
         <Route
           path={`/cardset/:id/createcards`}
-          component={() => <CreateCards />}
+          component={() => <CardsContainer />}
         />
 
         {/* TEST FORM FOR CREATE FLASHCARDS: */}
