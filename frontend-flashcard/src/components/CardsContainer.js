@@ -37,6 +37,10 @@ const CardsContainer = (props) => {
     });
   };
 
+  // const deleteCardPair = (cardPair) => {
+
+  // }
+
   const saveCardPair = (cardPair) => {
     setSavedPairs([...savedPairs, cardPair]);
     fetch(`http://localhost:3000/cardsets/${params.id}/flashcards`, {
@@ -97,7 +101,7 @@ const CardsContainer = (props) => {
             Add Card
           </Button>
         </div>
-        <Button positive onClick={showPage()}>
+        <Button positive onClick={() => showPage()}>
           Create Cards
         </Button>
       </div>
