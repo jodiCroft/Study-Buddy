@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Table, Form, Button, Card } from "semantic-ui-react";
 
 const ShowSet = (props) => {
+  const params = useParams();
   return <div>this will show the cardset you just made</div>;
 };
 

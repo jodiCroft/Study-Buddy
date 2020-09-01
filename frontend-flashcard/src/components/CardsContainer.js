@@ -55,54 +55,51 @@ const CardsContainer = (props) => {
       .then(console.log);
   };
 
-  const showPage = (e) => {
-    e.preventDefault();
+  const showPage = () => {
     push(`/cardset/${params.id}/show-set`);
   };
 
   return (
     <div>
       <div>
-        <Form onSubmit={(e) => showPage(e)}>
-          <Table basic>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Front</Table.HeaderCell>
-                <Table.HeaderCell>Back</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
+        <Table basic>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Front</Table.HeaderCell>
+              <Table.HeaderCell>Back</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
 
-            <Table.Body>
-              <Table.Cell>
-                {cardPairs.map((cardPair) => (
-                  <CardPair
-                    cardPair={cardPair}
-                    key={Math.random()}
-                    saveFrontText={saveFrontText}
-                    saveBackText={saveBackText}
-                    saveCardPair={saveCardPair}
-                  />
-                ))}
-              </Table.Cell>
-            </Table.Body>
-          </Table>
+          <Table.Body>
+            <Table.Cell>
+              {cardPairs.map((cardPair) => (
+                <CardPair
+                  cardPair={cardPair}
+                  key={Math.random()}
+                  saveFrontText={saveFrontText}
+                  saveBackText={saveBackText}
+                  saveCardPair={saveCardPair}
+                />
+              ))}
+            </Table.Cell>
+          </Table.Body>
+        </Table>
 
-          <div>
-            <Button
-              onClick={() =>
-                setCardPairs([
-                  ...cardPairs,
-                  { front: "", back: "", cardId: cardPairs.length },
-                ])
-              }
-            >
-              Add more
-            </Button>
-          </div>
-          <Button positive type="submit">
-            Create Cards
+        <div>
+          <Button
+            onClick={() =>
+              setCardPairs([
+                ...cardPairs,
+                { front: "", back: "", cardId: cardPairs.length },
+              ])
+            }
+          >
+            Add Card
           </Button>
-        </Form>
+        </div>
+        <Button positive onClick={showPage()}>
+          Create Cards
+        </Button>
       </div>
       <Button negative onClick={() => cancelCardset(params)}>
         Cancel
