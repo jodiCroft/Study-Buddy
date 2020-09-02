@@ -8,18 +8,15 @@ import SavedPair from "./SavedPair";
 const CardsContainer = (props) => {
   const { push } = useHistory();
   const [savedPairs, setSavedPairs] = useState([]);
-  // const [cardPair, setCardPair] = useState([
-  //   { front: "", back: "", cardId: 0 },
-  // ]);
 
   const params = useParams();
 
-  const cancelCardset = () => {
-    fetch(`http://localhost:3000/cardsets/${params.id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
-  };
+  // const cancelCardset = () => {
+  //   fetch(`http://localhost:3000/cardsets/${params.id}`, {
+  //     method: "DELETE",
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+  // };
 
   // const saveFrontText = (value) => {
   //   cardPair.map((card) => {
@@ -38,12 +35,11 @@ const CardsContainer = (props) => {
   // }
 
   const saveCardPair = (e) => {
-    console.log(savedPairs);
+    e.preventDefault();
     const cardPair = {
       front: e.target.frontText.value,
       back: e.target.backText.value,
     };
-    e.preventDefault();
     if (cardPair.front !== "" || cardPair.back !== "") {
       setSavedPairs((prevSavedPairs) => [...prevSavedPairs, cardPair]);
 

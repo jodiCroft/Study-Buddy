@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_08_25_225707) do
 
   create_table "cardsets", force: :cascade do |t|
+    t.integer "user_id"
     t.string "title"
     t.string "subject"
     t.string "access"
@@ -31,15 +32,6 @@ ActiveRecord::Schema.define(version: 2020_08_25_225707) do
     t.index ["cardset_id"], name: "index_flashcards_on_cardset_id"
   end
 
-  create_table "user_cardsets", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "cardset_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["cardset_id"], name: "index_user_cardsets_on_cardset_id"
-    t.index ["user_id"], name: "index_user_cardsets_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -50,6 +42,4 @@ ActiveRecord::Schema.define(version: 2020_08_25_225707) do
   end
 
   add_foreign_key "flashcards", "cardsets"
-  add_foreign_key "user_cardsets", "cardsets"
-  add_foreign_key "user_cardsets", "users"
 end

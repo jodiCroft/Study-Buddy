@@ -6,7 +6,7 @@ const Login = (props) => {
   const { push } = useHistory();
   return (
     <div>
-      <Form size="medium" onSubmit={(e) => props.handleLogin(e)}>
+      <Form size="large" onSubmit={(e) => props.handleLogin(e)}>
         <Form.Group>
           <Form.Field
             label="Username"

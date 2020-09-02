@@ -6,7 +6,7 @@ import Header from "./Header";
 import Login from "./Login";
 import MyIndex from "./MyIndex";
 import SignUp from "./SignUp";
-import ShowSet from "./ShowSet";
+import StudySet from "./StudySet";
 import { Route, withRouter } from "react-router-dom";
 
 import "../App.css";
@@ -19,9 +19,9 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/cardsets")
-      .then((res) => res.json())
-      .then((cardsets) => this.setState({ cardsets }));
+    // fetch("http://localhost:3000/cardsets")
+    //   .then((res) => res.json())
+    //   .then((cardsets) => this.setState({ cardsets }));
     fetch("http://localhost:3000/is_logged_in", {
       credentials: "include",
     })
@@ -52,7 +52,8 @@ class App extends React.Component {
       .then((res) => res.json())
       .then((user) => {
         this.setState({ currentUser: user.user });
-      });
+      })
+      .then(this.props.history.push("/home"));
   };
 
   handleLogout = () => {
@@ -155,7 +156,7 @@ class App extends React.Component {
           )}
         />
 
-        <Route path={`/cardset/:id/show-set`} component={() => <ShowSet />} />
+        <Route path={`/cardset/:id/study`} component={() => <StudySet />} />
 
         <Route
           path="/cardset/create"

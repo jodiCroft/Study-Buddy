@@ -2,12 +2,12 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
-        render json: @users, include: [:cardsets, :flashcards]
+        render json: @users, include: [:cardsets => {:include => :flashcards}]
     end
 
     def show
         @user = User.find_by(id: params[:id])
-        render json: @user, include: [:cardsets, :flashcards]
+        render json: @user, include: [:cardsets => {:include => :flashcards}]
     end
 
     def create
@@ -23,18 +23,18 @@ class UsersController < ApplicationController
         end
     end
 
-    def show
-        @user = User.find(params[:id])
-       if @user
-          render json: {
-            user: @user, include: [:cardsets]
-          }
-        else
-          render json: {
-            message: @user.errors.messages
-          }
-        end
-    end
+    # def show
+    #     @user = User.find(params[:id])
+    #    if @user
+    #       render json: {
+    #         user: @user, include: [:cardsets]
+    #       }
+    #     else
+    #       render json: {
+    #         message: @user.errors.messages
+    #       }
+    #     end
+    # end
 
     def update
         @user.update(:first_name, :last_name, :password)
