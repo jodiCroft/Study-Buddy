@@ -7,9 +7,13 @@ const Header = (props) => {
   return (
     <div>
       <Menu secondary>
-        <Image src="https://i.imgur.com/Om0FWJH.png" />
+        <Menu.Item onClick={() => push("/home")}>
+          <Image src="https://i.imgur.com/Om0FWJH.png" />
+        </Menu.Item>
+
         <Menu.Item
           name="home"
+          onClick={() => push("/home")}
           // active={activeItem === "home"}
           // onClick={this.handleItemClick}
         />

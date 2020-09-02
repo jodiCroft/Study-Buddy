@@ -8,34 +8,27 @@ const CardPair = (props) => {
       <div>
         <h3>Front:</h3>
       </div>
+      <Form onSubmit={(e) => props.saveCardPair(e)}>
+        <textarea
+          placeholder="front card text"
+          name="frontText"
+          // defaultValue={props.cardPair.front}
+          // onChange={(e) => props.saveFrontText(e.target.value)}
+        ></textarea>
 
-      <textarea
-        placeholder="front card text"
-        name="frontText"
-        defaultValue={props.cardPair.front}
-        onChange={(e) =>
-          props.saveFrontText(props.cardPair.cardId, e.target.value)
-        }
-      ></textarea>
+        <div>
+          <h3>Back:</h3>
+        </div>
 
-      <div>
-        <h3>Back:</h3>
-      </div>
+        <textarea
+          placeholder="back card text"
+          name="backText"
+          // defaultValue={props.cardPair.back}
+          // onChange={(e) => props.saveBackText(e.target.value)}
+        ></textarea>
 
-      <textarea
-        placeholder="back card text"
-        name="backText"
-        defaultValue={props.cardPair.back}
-        onChange={(e) =>
-          props.saveBackText(props.cardPair.cardId, e.target.value)
-        }
-      ></textarea>
-
-      <Button
-        positive
-        icon="right arrow"
-        onClick={() => props.saveCardPair(props.cardPair)}
-      />
+        <Button positive icon="right arrow" type="submit" />
+      </Form>
     </div>
   );
 };

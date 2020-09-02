@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :flashcards
-  resources :user_cardsets
+  
   resources :cardsets do 
     post('/flashcards', to: 'flashcards#create')
   end

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import { Table, Button, Form, Container, Grid } from "semantic-ui-react";
 import CardPair from "./CardPair";
-import SavedCards from "./SavedCards";
+import SavedPair from "./SavedPair";
 
 const CardsContainer = (props) => {
   const { push } = useHistory();
   const [savedPairs, setSavedPairs] = useState([]);
-  const [cardPair, setCardPair] = useState([
-    { front: "", back: "", cardId: 0 },
-  ]);
+  // const [cardPair, setCardPair] = useState([
+  //   { front: "", back: "", cardId: 0 },
+  // ]);
 
   const params = useParams();
 
@@ -21,29 +21,32 @@ const CardsContainer = (props) => {
     });
   };
 
-  const saveFrontText = (id, value) => {
-    cardPair.map((card) => {
-      if (card.cardId === id) {
-        card.front = value;
-      }
-    });
-  };
+  // const saveFrontText = (value) => {
+  //   cardPair.map((card) => {
+  //     card.front = value;
+  //   });
+  // };
 
-  const saveBackText = (id, value) => {
-    cardPair.map((card) => {
-      if (card.cardId === id) {
-        card.back = value;
-      }
-    });
-  };
+  // const saveBackText = (value) => {
+  //   cardPair.map((card) => {
+  //     card.back = value;
+  //   });
+  // };
 
   // const deleteCardPair = (cardPair) => {
 
   // }
 
-  const saveCardPair = (cardPair) => {
+  const saveCardPair = (e) => {
+    console.log(savedPairs);
+    const cardPair = {
+      front: e.target.frontText.value,
+      back: e.target.backText.value,
+    };
+    e.preventDefault();
     if (cardPair.front !== "" || cardPair.back !== "") {
-      setSavedPairs([...savedPairs, cardPair]);
+      setSavedPairs((prevSavedPairs) => [...prevSavedPairs, cardPair]);
+
       fetch(`http://localhost:3000/cardsets/${params.id}/flashcards`, {
         method: "POST",
         credentials: "include",
@@ -51,18 +54,11 @@ const CardsContainer = (props) => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          front: cardPair.front,
-          back: cardPair.back,
-        }),
+        body: JSON.stringify(cardPair),
       })
         .then((res) => res.json())
-        .then(console.log);
+        .then(console.log(savedPairs));
     }
-  };
-
-  const showPage = () => {
-    push(`/cardset/${params.id}/show-set`);
   };
 
   return (
@@ -70,19 +66,32 @@ const CardsContainer = (props) => {
       <Grid columns={2} divided>
         <Grid.Row>
           <Grid.Column>
-            {cardPair.map((cardPair) => (
-              <CardPair
-                cardPair={cardPair}
-                key={Math.random()}
-                saveFrontText={saveFrontText}
-                saveBackText={saveBackText}
-                saveCardPair={saveCardPair}
-              />
-            ))}
+            <CardPair
+              // cardPair={cardPair}
+              key={Math.random()}
+              // saveText={saveText}
+              // saveFrontText={saveFrontText}
+              // saveBackText={saveBackText}
+              saveCardPair={saveCardPair}
+            />
           </Grid.Column>
-          <Grid.Column>
-            <SavedCards savedPairs={savedPairs} showPage={showPage} />
-          </Grid.Column>
+          {savedPairs.length === 0 ? null : (
+            <Grid.Column>
+              <h1>Your Cards</h1>
+              {savedPairs.map((pair) => (
+                <SavedPair pair={pair} key={Math.random()} />
+              ))}
+              <br></br>
+              <Button
+                size="large"
+                positive
+                onClick={() => push("/my-index")}
+                // onClick={() => push(`/cardset/${params.id}/show-set`)}
+              >
+                Save!
+              </Button>
+            </Grid.Column>
+          )}
         </Grid.Row>
       </Grid>
       {/* <div> */}
