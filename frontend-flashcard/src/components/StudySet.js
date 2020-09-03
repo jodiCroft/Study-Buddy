@@ -11,6 +11,7 @@ const StudySet = (props) => {
   const flashcards = props.studyCard.flashcards;
 
   const handleNext = () => {
+    setFront(true);
     const newIndex = index + 1;
     setIndex(
       newIndex > flashcards.length - 1 ? flashcards.length - 1 : newIndex
@@ -18,6 +19,7 @@ const StudySet = (props) => {
   };
 
   const handleBack = () => {
+    setFront(true);
     setIndex(index === 0 ? 0 : index - 1);
   };
 

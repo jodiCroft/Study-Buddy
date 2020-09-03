@@ -17,11 +17,7 @@ const Header = (props) => {
           // active={activeItem === "home"}
           // onClick={this.handleItemClick}
         />
-        <Menu.Item
-          name="browse"
-          // active={activeItem === "messages"}
-          // onClick={this.handleItemClick}
-        />
+        <Menu.Item name="browse" onClick={() => push("/browse")} />
 
         <Menu.Menu position="right">
           <Menu.Item>

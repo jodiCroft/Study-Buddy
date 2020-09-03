@@ -7,6 +7,7 @@ import Login from "./Login";
 import MyIndex from "./MyIndex";
 import SignUp from "./SignUp";
 import StudySet from "./StudySet";
+import Browse from "./Browse";
 import { Route, withRouter } from "react-router-dom";
 
 import "../App.css";
@@ -14,14 +15,10 @@ import { render } from "react-dom";
 
 class App extends React.Component {
   state = {
-    cardsets: [],
     currentUser: "",
   };
 
   componentDidMount() {
-    // fetch("http://localhost:3000/cardsets")
-    //   .then((res) => res.json())
-    //   .then((cardsets) => this.setState({ cardsets }));
     fetch("http://localhost:3000/is_logged_in", {
       credentials: "include",
     })
@@ -155,6 +152,8 @@ class App extends React.Component {
             />
           )}
         />
+
+        <Route path="/browse" component={() => <Browse />} />
 
         {/* <Route path={`/cardset/:id/study`} component={() => <StudySet />} /> */}
 

@@ -5,7 +5,7 @@ import StudySet from "./StudySet";
 
 const MyIndex = (props) => {
   const [myCardsets, setMyCardsets] = useState([]);
-  const [studyCard, setStudyCard] = useState();
+  const [studyCard, setStudyCard] = useState({});
 
   useEffect(() => {
     let isMounted = true;
