@@ -156,7 +156,7 @@ class App extends React.Component {
           )}
         />
 
-        <Route path={`/cardset/:id/study`} component={() => <StudySet />} />
+        {/* <Route path={`/cardset/:id/study`} component={() => <StudySet />} /> */}
 
         <Route
           path="/cardset/create"

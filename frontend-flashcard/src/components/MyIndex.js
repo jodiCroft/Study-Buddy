@@ -1,20 +1,25 @@
 import React, { useState, useEffect, Component } from "react";
 import { Button, Form, Divider, Card, Grid } from "semantic-ui-react";
 import { useParams, useHistory } from "react-router-dom";
+import StudySet from "./StudySet";
 
 const MyIndex = (props) => {
-  console.log(props.currentUser.id);
+  const [myCardsets, setMyCardsets] = useState([]);
+  const [studyCard, setStudyCard] = useState();
 
   useEffect(() => {
+    let isMounted = true;
     fetch(`http://localhost:3000/users/${props.currentUser.id}`, {
       credentials: "include",
     })
       .then((res) => res.json())
-      .then((user) => setMyCardsets(user.cardsets));
+      .then((user) => {
+        if (isMounted) setMyCardsets(user.cardsets.reverse());
+      });
+    return () => {
+      isMounted = false;
+    };
   }, []);
-
-  const [myCardsets, setMyCardsets] = useState([]);
-  const [studyCards, setStudyCards] = useState([]);
 
   const { push } = useHistory();
 
@@ -27,15 +32,7 @@ const MyIndex = (props) => {
               <Grid.Column>
                 <h1>Click on a cardset to study it!</h1>
                 {myCardsets.map((cardset) => (
-                  <Card
-                    key={cardset.id}
-                    onClick={() =>
-                      setStudyCards((prevSavedPairs) => [
-                        ...studyCards,
-                        cardset,
-                      ])
-                    }
-                  >
+                  <Card key={cardset.id} onClick={() => setStudyCard(cardset)}>
                     <Card.Content>
                       <Card.Header>{cardset.title}</Card.Header>
                       <Card.Description>{cardset.subject}</Card.Description>
@@ -44,11 +41,9 @@ const MyIndex = (props) => {
                   </Card>
                 ))}
               </Grid.Column>
-              {/* IF STUDYCARDS HAS ANYTHING IN IT, THEN SHOW THIS, OTHERWISE NULL: */}
+
               <Grid.Column>
-                {studyCards.map((card) => (
-                  <h1>{card.title}</h1>
-                ))}
+                {studyCard ? <StudySet studyCard={studyCard} /> : null}
               </Grid.Column>
             </Grid.Row>
           </Grid>

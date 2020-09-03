@@ -1,6 +1,19 @@
 import React, { Component, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Table, Form, Button, Grid } from "semantic-ui-react";
+import { Table, Form, Button, Grid, Message } from "semantic-ui-react";
+
+// NEED TO DISPLAY THIS MESSAGE IF THEY LEAVE FRONT AND BACK BLANK. MAYBE ADD A DISMISSABLE MESSAGE SO THEY CAN EXIT OUT OF IT.
+
+{
+  /* <div>
+<Message negative>
+  <Message.Header>
+    Must put text in either front or back
+  </Message.Header>
+  <p>Cannot leave both fields blank</p>
+</Message>
+</div> */
+}
 
 const CardPair = (props) => {
   return (
