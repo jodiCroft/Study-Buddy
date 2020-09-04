@@ -8,8 +8,9 @@ const Browse = (props) => {
   const { push } = useHistory();
   const [allCardsets, setAllCardsets] = useState([]);
   const [studyCard, setStudyCard] = useState({});
-  const [front, setFront] = useState(true);
-  const [index, setIndex] = useState(0);
+  //   const [front, setFront] = useState(true);
+  //   const [index, setIndex] = useState(0);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -25,46 +26,40 @@ const Browse = (props) => {
     };
   }, []);
 
-  const handleNext = () => {
-    setFront(true);
-    const newIndex = index + 1;
-    setIndex(
-      newIndex > studyCard.flashcards.length - 1
-        ? studyCard.flashcards.length - 1
-        : newIndex
-    );
-  };
-
-  const handleBack = () => {
-    setFront(true);
-    setIndex(index === 0 ? 0 : index - 1);
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
     <div>
-      {/* <Menu.Item>
-            <Input
-              icon="search"
-              placeholder="Search All Flashcards..."
-              onChange={() => handleSearch()}
-            />
-          </Menu.Item> */}
-
       {/* STaRt TEST */}
       <div>
         <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column>
               <h1>Click on a cardset to study it!</h1>
-              {allCardsets.map((cardset) => (
-                <Card key={cardset.id} onClick={() => setStudyCard(cardset)}>
-                  <Card.Content>
-                    <Card.Header>{cardset.title}</Card.Header>
-                    <Card.Description>{cardset.subject}</Card.Description>
-                    <Card.Description>{cardset.description}</Card.Description>
-                  </Card.Content>
-                </Card>
-              ))}
+              <div>
+                <input onChange={(e) => handleSearch(e)} />
+                <i className="search icon" />
+              </div>
+
+              {allCardsets
+                .filter((card) => {
+                  return (
+                    card.title.toLowerCase().includes(search) ||
+                    card.description.toLowerCase().includes(search) ||
+                    card.subject.toLowerCase().includes(search)
+                  );
+                })
+                .map((cardset) => (
+                  <Card key={cardset.id} onClick={() => setStudyCard(cardset)}>
+                    <Card.Content>
+                      <Card.Header>{cardset.title}</Card.Header>
+                      <Card.Description>{cardset.subject}</Card.Description>
+                      <Card.Description>{cardset.description}</Card.Description>
+                    </Card.Content>
+                  </Card>
+                ))}
             </Grid.Column>
 
             <Grid.Column>
@@ -75,47 +70,6 @@ const Browse = (props) => {
       </div>
 
       {/* End Test */}
-
-      {/* {is.empty(studyCard) ? (
-        allCardsets.map((cardset) => (
-          <Card key={cardset.id} onClick={() => setStudyCard(cardset)}>
-            <Card.Content>
-              <Card.Header>{cardset.title}</Card.Header>
-              <Card.Description>
-                <i>{cardset.subject}</i>
-              </Card.Description>
-              <Card.Description>{cardset.description}</Card.Description>
-            </Card.Content>
-          </Card>
-        ))
-      ) : (
-        <div>
-          <h2>{studyCard.title}</h2>
-          <i>{front === true ? "Front" : "Back"}</i>
-
-          <Card onClick={() => setFront(!front)}>
-            <Card.Content>
-              <Card.Description>
-                {front === true
-                  ? studyCard.flashcards[index].front
-                  : studyCard.flashcards[index].back}
-              </Card.Description>
-            </Card.Content>
-          </Card>
-
-          <div>
-            <Button.Group>
-              <Button negative onClick={() => handleBack()}>
-                Back
-              </Button>
-              <Button.Or />
-              <Button positive onClick={() => handleNext()}>
-                Next
-              </Button>
-            </Button.Group>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };
