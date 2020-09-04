@@ -29,6 +29,15 @@ const Header = (props) => {
             />
           ) : null}
 
+          {!props.currentUser.id ? (
+            <Menu.Item
+              name="Sign Up"
+              onClick={() => {
+                push("/sign-up");
+              }}
+            />
+          ) : null}
+
           <Menu.Item
             name={!props.currentUser.id ? "sign in" : "log out"}
             // active={activeItem === "logout"}

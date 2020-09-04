@@ -41,7 +41,7 @@ const CardsContainer = (props) => {
       front: e.target.frontText.value,
       back: e.target.backText.value,
     };
-    if (cardPair.front !== "" && cardPair.back !== "") {
+    {
       setSavedPairs((prevSavedPairs) => [cardPair, ...prevSavedPairs]);
 
       fetch(`http://localhost:3000/cardsets/${params.id}/flashcards`, {
@@ -55,8 +55,6 @@ const CardsContainer = (props) => {
       })
         .then((res) => res.json())
         .then(console.log(savedPairs));
-    } else {
-      alert("Must put text in Front and Back text fields. Cannot leave blank.");
     }
   };
 

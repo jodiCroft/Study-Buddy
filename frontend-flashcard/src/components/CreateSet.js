@@ -7,9 +7,7 @@ const CreateSet = (props) => {
       <div>
         <Form
           size="massive"
-          onSubmit={(e) => {
-            props.createCardSet(e);
-          }}
+          onSubmit={(e) => props.createCardSet(e)}
           className="CreateSet"
         >
           <Form.Group widths="equal">
@@ -18,18 +16,21 @@ const CreateSet = (props) => {
               control="input"
               placeholder="title..."
               name="title"
+              required="true"
             />
             <Form.Field
               label="Subject"
               control="input"
               placeholder="biology"
               name="subject"
+              required="true"
             />
             <Form.Field
               label="Description"
               control="input"
               placeholder="description..."
               name="description"
+              required="true"
             />
           </Form.Group>
 

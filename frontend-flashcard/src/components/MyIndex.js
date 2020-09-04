@@ -2,10 +2,13 @@ import React, { useState, useEffect, Component } from "react";
 import { Button, Form, Divider, Card, Grid, Icon } from "semantic-ui-react";
 import { useParams, useHistory } from "react-router-dom";
 import StudySet from "./StudySet";
+import is from "is_js";
 
 const MyIndex = (props) => {
   const [myCardsets, setMyCardsets] = useState([]);
-  const [studyCard, setStudyCard] = useState();
+  const [studyCard, setStudyCard] = useState({});
+  const [index, setIndex] = useState(0);
+  const flashcards = studyCard.flashcards;
 
   useEffect(() => {
     let isMounted = true;
@@ -23,16 +26,38 @@ const MyIndex = (props) => {
 
   const { push } = useHistory();
 
+  const handleNext = () => {
+    // setFront(true);
+    const newIndex = index + 1;
+    setIndex(
+      newIndex > flashcards.length - 1 ? flashcards.length - 1 : newIndex
+    );
+  };
+
+  const handleBack = () => {
+    // setFront(true);
+    setIndex(index === 0 ? 0 : index - 1);
+  };
+
   return (
     <div>
-      {myCardsets === [] ? (
-        <h2>You have no flashcard sets yet!</h2>
+      {is.empty(myCardsets) ? (
+        <div>
+          <h2>You have no flashcard sets yet!</h2>
+          <Button
+            positive
+            size="massive"
+            onClick={() => push("/cardset/create")}
+          >
+            Create a Flashcard Set
+          </Button>
+        </div>
       ) : (
         <div>
           <Grid columns={2} divided>
             <Grid.Row>
               <Grid.Column>
-                <h1>Click on any cardset to study it!</h1>
+                <h1>Click on a cardset to study it!</h1>
                 {myCardsets.map((cardset) => (
                   <Card key={cardset.id} onClick={() => setStudyCard(cardset)}>
                     <Card.Content>
@@ -45,7 +70,14 @@ const MyIndex = (props) => {
               </Grid.Column>
 
               <Grid.Column>
-                {studyCard ? <StudySet studyCard={studyCard} /> : null}
+                {is.empty(studyCard) ? null : (
+                  <StudySet
+                    studyCard={studyCard}
+                    index={index}
+                    handleBack={handleBack}
+                    handleNext={handleNext}
+                  />
+                )}
               </Grid.Column>
             </Grid.Row>
           </Grid>

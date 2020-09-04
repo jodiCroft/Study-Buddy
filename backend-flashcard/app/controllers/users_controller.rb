@@ -11,11 +11,11 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
+        @user = User.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], password: params[:password])
         if @user.valid?
             @user.save
             session[:user_id] = @user.id 
-            render json: @user, include: [:cardsets]
+            render json: @user, include: [:cardsets => {:include => :flashcards}]
         else
             render json: {
                 message: @user.errors.messages
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:first_name, :last_name, :username, :password, :id)
+        params.permit(:first_name, :last_name, :username, :password)
     end
 
 end

@@ -25,6 +25,7 @@ const CardPair = (props) => {
         <textarea
           placeholder="front card text"
           name="frontText"
+          required="true"
           // defaultValue={props.cardPair.front}
           // onChange={(e) => props.saveFrontText(e.target.value)}
         ></textarea>
@@ -36,6 +37,7 @@ const CardPair = (props) => {
         <textarea
           placeholder="back card text"
           name="backText"
+          required="true"
           // defaultValue={props.cardPair.back}
           // onChange={(e) => props.saveBackText(e.target.value)}
         ></textarea>

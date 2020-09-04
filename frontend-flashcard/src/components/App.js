@@ -61,7 +61,9 @@ class App extends React.Component {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(this.setState({ currentUser: "" }));
+    })
+      .then(this.setState({ currentUser: "" }))
+      .then(this.props.history.push("/home"));
   };
 
   createCardSet = (e) => {
@@ -86,8 +88,7 @@ class App extends React.Component {
         .then((cardset) => {
           this.props.history.push(`/cardset/${cardset.id}/createcards`);
         });
-    }
-    // else this.props.history.push("/login");
+    } else this.props.history.push("/login");
   };
 
   // postToUserCardsets = (id) => {
@@ -107,7 +108,23 @@ class App extends React.Component {
 
   signUp = (e) => {
     e.preventDefault();
-    // fetch POST to new user and then return that new user and send them to login to be auto logged in
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        first_name: e.target.firstName.value,
+        last_name: e.target.lastName.value,
+        username: e.target.username.value,
+        password: e.target.password.value,
+      }),
+    })
+      .then((res) => res.json())
+      .then((user) => this.setState({ currentUser: user }))
+      .then(this.props.history.push("/cardset/create"));
   };
 
   // isLoggedIn = () => {
@@ -131,10 +148,7 @@ class App extends React.Component {
         <Route
           path="/sign-up"
           component={() => (
-            <SignUp
-              currentUser={this.state.currentUser}
-              handleLogin={this.signUp}
-            />
+            <SignUp currentUser={this.state.currentUser} signUp={this.signUp} />
           )}
         />
 
@@ -159,12 +173,7 @@ class App extends React.Component {
 
         <Route
           path="/cardset/create"
-          component={() => (
-            <CreateSet
-              currentUser={this.state.currentUser}
-              createCardSet={this.createCardSet}
-            />
-          )}
+          component={() => <CreateSet createCardSet={this.createCardSet} />}
         />
         <Route
           path={`/cardset/:id/createcards`}
