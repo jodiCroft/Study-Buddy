@@ -6,8 +6,6 @@ const StudySet = (props) => {
   const params = useParams();
   const [front, setFront] = useState(true);
   const [index, setIndex] = useState(0);
-
-  console.log(props.studyCard.flashcards.length);
   const flashcards = props.studyCard.flashcards;
 
   const handleNext = () => {
@@ -26,6 +24,7 @@ const StudySet = (props) => {
   return (
     <div>
       <h2>{props.studyCard.title}</h2>
+      <h5>{`Flashcard #${index + 1} of ${flashcards.length}`}</h5>
       <i>{front === true ? "Front" : "Back"}</i>
 
       {

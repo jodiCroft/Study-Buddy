@@ -19,6 +19,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     fetch("http://localhost:3000/is_logged_in", {
       credentials: "include",
     })
@@ -83,7 +84,6 @@ class App extends React.Component {
       })
         .then((res) => res.json())
         .then((cardset) => {
-          this.setState({ cardsets: [...this.state.cardsets, cardset] });
           this.props.history.push(`/cardset/${cardset.id}/createcards`);
         });
     }
@@ -148,7 +148,7 @@ class App extends React.Component {
           component={() => (
             <MyIndex
               currentUser={this.state.currentUser}
-              cardsets={this.state.cardsets}
+              // cardsets={this.state.cardsets}
             />
           )}
         />

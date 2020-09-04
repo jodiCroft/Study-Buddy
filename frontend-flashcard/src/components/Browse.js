@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import is from "is_js";
 import { useHistory } from "react-router-dom";
-import { Button, Form, Divider, Card } from "semantic-ui-react";
+import { Button, Form, Divider, Card, Grid } from "semantic-ui-react";
+import StudySet from "./StudySet";
 
 const Browse = (props) => {
   const { push } = useHistory();
@@ -41,7 +42,41 @@ const Browse = (props) => {
 
   return (
     <div>
-      {is.empty(studyCard) ? (
+      {/* <Menu.Item>
+            <Input
+              icon="search"
+              placeholder="Search All Flashcards..."
+              onChange={() => handleSearch()}
+            />
+          </Menu.Item> */}
+
+      {/* STaRt TEST */}
+      <div>
+        <Grid columns={2} divided>
+          <Grid.Row>
+            <Grid.Column>
+              <h1>Click on a cardset to study it!</h1>
+              {allCardsets.map((cardset) => (
+                <Card key={cardset.id} onClick={() => setStudyCard(cardset)}>
+                  <Card.Content>
+                    <Card.Header>{cardset.title}</Card.Header>
+                    <Card.Description>{cardset.subject}</Card.Description>
+                    <Card.Description>{cardset.description}</Card.Description>
+                  </Card.Content>
+                </Card>
+              ))}
+            </Grid.Column>
+
+            <Grid.Column>
+              {is.empty(studyCard) ? null : <StudySet studyCard={studyCard} />}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
+
+      {/* End Test */}
+
+      {/* {is.empty(studyCard) ? (
         allCardsets.map((cardset) => (
           <Card key={cardset.id} onClick={() => setStudyCard(cardset)}>
             <Card.Content>
@@ -80,7 +115,7 @@ const Browse = (props) => {
             </Button.Group>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

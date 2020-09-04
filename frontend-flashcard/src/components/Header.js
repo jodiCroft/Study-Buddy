@@ -17,12 +17,9 @@ const Header = (props) => {
           // active={activeItem === "home"}
           // onClick={this.handleItemClick}
         />
-        <Menu.Item name="browse" onClick={() => push("/browse")} />
+        <Menu.Item name="browse all sets" onClick={() => push("/browse")} />
 
         <Menu.Menu position="right">
-          <Menu.Item>
-            <Input icon="search" placeholder="Search All Flashcards..." />
-          </Menu.Item>
           {props.currentUser.id ? (
             <Menu.Item
               name="My Card Sets"
