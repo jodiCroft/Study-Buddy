@@ -1,11 +1,9 @@
 import React, { Component, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Table, Form, Button, Card } from "semantic-ui-react";
 
 const EditProfile = (props) => {
   const params = useParams();
-
-  //   `/cardset/${cardset.id}/createcards`
 
   const updateProfile = (e) => {
     e.preventDefault();
@@ -21,7 +19,10 @@ const EditProfile = (props) => {
         username: e.target.username.value,
         password: e.target.password.value,
       }),
-    }).then(props.setEdit(false));
+    })
+      .then((res) => res.json())
+      .then((user) => props.setCurrentUser(user))
+      .then(props.setEdit(false));
     // .then(user => this.setState({currentUser:user.user}))
   };
 

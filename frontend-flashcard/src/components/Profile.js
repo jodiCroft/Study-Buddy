@@ -1,11 +1,12 @@
 import React, { Component, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Table, Form, Button, Card } from "semantic-ui-react";
 import EditProfile from "./EditProfile";
 
 const Profile = (props) => {
   const params = useParams();
   const [edit, setEdit] = useState(false);
+  const { push } = useHistory();
   const fullName =
     props.currentUser.first_name + " " + props.currentUser.last_name;
 
@@ -16,7 +17,9 @@ const Profile = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
+      .then(props.setCurrentUser(""))
+      .then(push("/home"));
   };
 
   return (
@@ -51,6 +54,7 @@ const Profile = (props) => {
             edit={edit}
             setEdit={setEdit}
             currentUser={props.currentUser}
+            setCurrentUser={props.setCurrentUser}
           />
         </div>
       ) : null}
