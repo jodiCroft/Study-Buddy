@@ -9,6 +9,16 @@ const Profile = (props) => {
   const fullName =
     props.currentUser.first_name + " " + props.currentUser.last_name;
 
+  const handleDelete = () => {
+    fetch(`http://localhost:3000/users/${props.currentUser.id}`, {
+      credentials: "include",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
   return (
     <div>
       <h3>{`Welcome to your profile, ${props.currentUser.first_name}`}</h3>
@@ -30,7 +40,9 @@ const Profile = (props) => {
             Edit
           </Button>
           <Button.Or />
-          <Button negative>Delete Account</Button>
+          <Button negative onClick={() => handleDelete()}>
+            Delete Account
+          </Button>
         </Button.Group>
       </Card>
       {edit ? (
