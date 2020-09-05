@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import is from "is_js";
 import { useHistory } from "react-router-dom";
-import { Button, Form, Divider, Card, Grid } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Divider,
+  Card,
+  Message,
+  Grid,
+  Input,
+} from "semantic-ui-react";
 import StudySet from "./StudySet";
 
 const Browse = (props) => {
@@ -54,8 +62,12 @@ const Browse = (props) => {
             <Grid.Column>
               <h1>Click on any cardset to study it!</h1>
               <div>
-                <input onChange={(e) => handleSearch(e)} />
-                <i className="search icon" />
+                <Input
+                  onChange={(e) => handleSearch(e)}
+                  size="big"
+                  icon="search"
+                  placeholder="subject, title or description"
+                />
               </div>
 
               {allCardsets
@@ -84,7 +96,13 @@ const Browse = (props) => {
             </Grid.Column>
 
             <Grid.Column>
-              {is.empty(studyCard) ? null : (
+              {is.empty(studyCard) ? null : is.empty(studyCard.flashcards) ? (
+                <Message negative>
+                  <Message.Header>
+                    No flashcards in this set to display
+                  </Message.Header>
+                </Message>
+              ) : (
                 <StudySet
                   studyCard={studyCard}
                   index={index}

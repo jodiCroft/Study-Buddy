@@ -28,6 +28,14 @@ const Header = (props) => {
               }}
             />
           ) : null}
+          {props.currentUser.id ? (
+            <Menu.Item
+              name="My Profile"
+              onClick={() => {
+                push(`/user/${props.currentUser.id}/profile`);
+              }}
+            />
+          ) : null}
 
           {!props.currentUser.id ? (
             <Menu.Item

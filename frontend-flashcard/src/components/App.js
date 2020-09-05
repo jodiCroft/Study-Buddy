@@ -8,6 +8,7 @@ import MyIndex from "./MyIndex";
 import SignUp from "./SignUp";
 import StudySet from "./StudySet";
 import Browse from "./Browse";
+import Profile from "./Profile";
 import { Route, withRouter } from "react-router-dom";
 
 import "../App.css";
@@ -178,6 +179,10 @@ class App extends React.Component {
         <Route
           path={`/cardset/:id/createcards`}
           component={() => <CardsContainer />}
+        />
+        <Route
+          path={`/user/:id/profile`}
+          component={() => <Profile currentUser={this.state.currentUser} />}
         />
 
         {/* TEST FORM FOR CREATE FLASHCARDS: */}

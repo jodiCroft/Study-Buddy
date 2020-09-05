@@ -1,6 +1,13 @@
 import React, { Component, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Table, Form, Button, Grid, Message } from "semantic-ui-react";
+import {
+  Table,
+  Form,
+  Button,
+  Grid,
+  Message,
+  TextArea,
+} from "semantic-ui-react";
 
 // NEED TO DISPLAY THIS MESSAGE IF THEY LEAVE FRONT AND BACK BLANK. MAYBE ADD A DISMISSABLE MESSAGE SO THEY CAN EXIT OUT OF IT.
 
@@ -22,25 +29,27 @@ const CardPair = (props) => {
         <h3>Front:</h3>
       </div>
       <Form onSubmit={(e) => props.saveCardPair(e)}>
-        <textarea
+        <TextArea
+          style={{ minHeight: 190 }}
           placeholder="front card text"
           name="frontText"
           required="true"
           // defaultValue={props.cardPair.front}
           // onChange={(e) => props.saveFrontText(e.target.value)}
-        ></textarea>
+        ></TextArea>
 
         <div>
           <h3>Back:</h3>
         </div>
 
-        <textarea
+        <TextArea
+          style={{ minHeight: 190 }}
           placeholder="back card text"
           name="backText"
           required="true"
           // defaultValue={props.cardPair.back}
           // onChange={(e) => props.saveBackText(e.target.value)}
-        ></textarea>
+        ></TextArea>
 
         <Button positive icon="right arrow" type="submit" />
       </Form>

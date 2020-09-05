@@ -1,5 +1,13 @@
 import React, { useState, useEffect, Component } from "react";
-import { Button, Form, Divider, Card, Grid, Icon } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Divider,
+  Card,
+  Grid,
+  Icon,
+  Message,
+} from "semantic-ui-react";
 import { useParams, useHistory } from "react-router-dom";
 import StudySet from "./StudySet";
 import is from "is_js";
@@ -70,7 +78,13 @@ const MyIndex = (props) => {
               </Grid.Column>
 
               <Grid.Column>
-                {is.empty(studyCard) ? null : (
+                {is.empty(studyCard) ? null : is.empty(studyCard.flashcards) ? (
+                  <Message negative>
+                    <Message.Header>
+                      No flashcards in this set to display
+                    </Message.Header>
+                  </Message>
+                ) : (
                   <StudySet
                     studyCard={studyCard}
                     index={index}

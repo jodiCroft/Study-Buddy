@@ -37,7 +37,8 @@ class UsersController < ApplicationController
     # end
 
     def update
-        @user.update(:first_name, :last_name, :password)
+        @user = User.find_by(id: params[:id])
+        @user.update(username: params[:username], password: params[:password])
         render json: @user, include: [:cardsets]
     end
 
