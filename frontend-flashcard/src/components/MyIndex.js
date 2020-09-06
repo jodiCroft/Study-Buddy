@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component, Fragment } from "react";
 import {
   Button,
   Form,
@@ -66,14 +66,23 @@ const MyIndex = (props) => {
             <Grid.Row>
               <Grid.Column>
                 <h1>Click on a cardset to study it!</h1>
+
                 {myCardsets.map((cardset) => (
-                  <Card key={cardset.id} onClick={() => setStudyCard(cardset)}>
-                    <Card.Content>
-                      <Card.Header>{cardset.title}</Card.Header>
-                      <Card.Description>{cardset.subject}</Card.Description>
-                      <Card.Description>{cardset.description}</Card.Description>
-                    </Card.Content>
-                  </Card>
+                  <div>
+                    <Card
+                      key={cardset.id}
+                      onClick={() => setStudyCard(cardset)}
+                    >
+                      <Card.Content>
+                        <Card.Header>{cardset.title}</Card.Header>
+                        <Card.Description>{cardset.subject}</Card.Description>
+                        <Card.Description>
+                          {cardset.description}
+                        </Card.Description>
+                      </Card.Content>
+                    </Card>
+                    <Button icon="edit" />
+                  </div>
                 ))}
               </Grid.Column>
 

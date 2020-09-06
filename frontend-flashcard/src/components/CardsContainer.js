@@ -18,22 +18,6 @@ const CardsContainer = (props) => {
   //   });
   // };
 
-  // const saveFrontText = (value) => {
-  //   cardPair.map((card) => {
-  //     card.front = value;
-  //   });
-  // };
-
-  // const saveBackText = (value) => {
-  //   cardPair.map((card) => {
-  //     card.back = value;
-  //   });
-  // };
-
-  // const deleteCardPair = (cardPair) => {
-
-  // }
-
   const saveCardPair = (e) => {
     e.preventDefault();
 
@@ -79,63 +63,13 @@ const CardsContainer = (props) => {
                 <SavedPair pair={pair} key={Math.random()} />
               ))}
               <br></br>
-              <Button
-                size="large"
-                positive
-                onClick={() => push("/my-index")}
-                // onClick={() => push(`/cardset/${params.id}/show-set`)}
-              >
+              <Button size="large" positive onClick={() => push("/my-index")}>
                 Save!
               </Button>
             </Grid.Column>
           )}
         </Grid.Row>
       </Grid>
-      {/* <div> */}
-      {/* <Table basic>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Front</Table.HeaderCell>
-              <Table.HeaderCell>Back</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-
-          <Table.Body>
-            {cardPairs.map((cardPair) => (
-              <CardPair
-                cardPair={cardPair}
-                key={Math.random()}
-                saveFrontText={saveFrontText}
-                saveBackText={saveBackText}
-                saveCardPair={saveCardPair}
-              />
-            ))}
-          </Table.Body>
-        </Table>
-
-        <div>
-          <Button
-            onClick={() =>
-              setCardPairs([
-                ...cardPairs,
-                { front: "", back: "", cardId: cardPairs.length },
-              ])
-            }
-          >
-            Add Card
-          </Button>
-        </div>
-        <Button positive onClick={() => showPage()}>
-          Create Cards
-        </Button>
-      </div>
-      <Button negative onClick={() => cancelCardset(params)}>
-        Cancel
-      </Button>
-
-      <Container>
-        <SavedCards savedPairs={savedPairs} />
-      </Container> */}
     </div>
   );
 };

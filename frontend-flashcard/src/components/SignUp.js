@@ -13,18 +13,21 @@ const SignUp = (props) => {
             name="firstName"
             control="input"
             placeholder="Joe"
+            required="true"
           />
           <Form.Field
             label="Last Name"
             name="lastName"
             control="input"
             placeholder="Smith"
+            required="true"
           />
           <Form.Field
             label="Username"
             name="username"
             control="input"
             placeholder="joesmith1999"
+            required="true"
           />
           <Form.Field
             label="Password"
@@ -32,6 +35,7 @@ const SignUp = (props) => {
             control="input"
             type="password"
             placeholder="password..."
+            required="true"
           />
 
           <Button type="submit">Sign Up</Button>
