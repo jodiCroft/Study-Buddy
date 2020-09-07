@@ -32,7 +32,10 @@ class CardsetsController < ApplicationController
     end
 
     def update
-    end
+      @cardset = Cardset.find_by(id: params[:id])
+      @cardset.update(title: params[:title], description: params[:description], subject: params[:subject])
+      render json: @cardset, include: [:flashcards]
+  end
 
     def destroy
       @cardset = Cardset.find(params[:id])

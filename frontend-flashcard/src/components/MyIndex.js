@@ -7,16 +7,19 @@ import {
   Grid,
   Icon,
   Message,
+  TextArea,
 } from "semantic-ui-react";
 import { useParams, useHistory } from "react-router-dom";
 import StudySet from "./StudySet";
-import is from "is_js";
+import is, { json } from "is_js";
 
 const MyIndex = (props) => {
   const [myCardsets, setMyCardsets] = useState([]);
   const [studyCard, setStudyCard] = useState({});
   const [index, setIndex] = useState(0);
   const flashcards = studyCard.flashcards;
+  const [showOptions, setShowOptions] = useState(false);
+  const [currentCardset, setCurrentCardset] = useState({});
 
   useEffect(() => {
     let isMounted = true;
@@ -47,6 +50,31 @@ const MyIndex = (props) => {
     setIndex(index === 0 ? 0 : index - 1);
   };
 
+  const updateCardset = (e) => {
+    console.log(e.target.title.value);
+    fetch(`http://localhost:3000/cardsets/${currentCardset.id}`, {
+      credentials: "include",
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        title: e.target.title.value,
+        description: e.target.description.value,
+        subject: e.target.subject.value,
+      }),
+    })
+      .then((res) => res.json())
+      // I need to replace the card in place - not at the beginning or end....map? forEAch?
+      .then((cardset) => {
+        const newCards = myCardsets.filter((card) => card.id !== cardset.id);
+        setMyCardsets([...newCards, cardset]);
+      })
+      .then(setShowOptions(false))
+      .then(setCurrentCardset({}));
+  };
+
   return (
     <div>
       {is.empty(myCardsets) ? (
@@ -66,6 +94,12 @@ const MyIndex = (props) => {
             <Grid.Row>
               <Grid.Column>
                 <h1>Click on a cardset to study it!</h1>
+                <Button onClick={() => setShowOptions(!showOptions)}>
+                  {showOptions === true ? "Finished Editing" : "Edit Cardsets"}
+                </Button>
+                <br></br>
+                <br></br>
+                <br></br>
 
                 {myCardsets.map((cardset) => (
                   <div>
@@ -81,12 +115,55 @@ const MyIndex = (props) => {
                         </Card.Description>
                       </Card.Content>
                     </Card>
-                    <Button icon="edit" />
+                    <div>
+                      {showOptions === true ? (
+                        <Button.Group>
+                          <Button onClick={() => setCurrentCardset(cardset)}>
+                            Edit
+                          </Button>
+                          <Button.Or />
+                          <Button negative>Delete</Button>
+                        </Button.Group>
+                      ) : null}
+                    </div>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                   </div>
                 ))}
               </Grid.Column>
 
               <Grid.Column>
+                {/* begin test */}
+
+                {is.empty(currentCardset) ? null : (
+                  <Form size="big" onSubmit={(e) => updateCardset(e)}>
+                    <Form.Group widths="equal">
+                      <Form.Field
+                        label="Cardset title"
+                        control="input"
+                        name="title"
+                        defaultValue={currentCardset.title}
+                      />
+                      <Form.Field
+                        label="Subject"
+                        control="input"
+                        defaultValue={currentCardset.subject}
+                        name="subject"
+                      />
+                      <Form.TextArea
+                        label="Description"
+                        defaultValue={currentCardset.description}
+                        name="description"
+                      />
+                    </Form.Group>
+
+                    <Button type="submit">Save Changes</Button>
+                    <Divider hidden />
+                  </Form>
+                )}
+
+                {/* end test */}
                 {is.empty(studyCard) ? null : is.empty(studyCard.flashcards) ? (
                   <Message negative>
                     <Message.Header>
