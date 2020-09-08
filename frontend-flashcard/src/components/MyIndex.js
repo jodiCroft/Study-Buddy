@@ -66,10 +66,15 @@ const MyIndex = (props) => {
       }),
     })
       .then((res) => res.json())
-      // I need to replace the card in place - not at the beginning or end....map? forEAch?
+
       .then((cardset) => {
-        const newCards = myCardsets.filter((card) => card.id !== cardset.id);
-        setMyCardsets([...newCards, cardset]);
+        setMyCardsets(
+          myCardsets.map((c) => {
+            if (c.id === cardset.id) {
+              return cardset;
+            } else return c;
+          })
+        );
       })
       .then(setShowOptions(false))
       .then(setCurrentCardset({}));
@@ -94,6 +99,7 @@ const MyIndex = (props) => {
             <Grid.Row>
               <Grid.Column>
                 <h1>Click on a cardset to study it!</h1>
+
                 <Button onClick={() => setShowOptions(!showOptions)}>
                   {showOptions === true ? "Finished Editing" : "Edit Cardsets"}
                 </Button>
@@ -134,8 +140,6 @@ const MyIndex = (props) => {
               </Grid.Column>
 
               <Grid.Column>
-                {/* begin test */}
-
                 {is.empty(currentCardset) ? null : (
                   <Form size="big" onSubmit={(e) => updateCardset(e)}>
                     <Form.Group widths="equal">
@@ -158,12 +162,18 @@ const MyIndex = (props) => {
                       />
                     </Form.Group>
 
-                    <Button type="submit">Save Changes</Button>
+                    <Button type="submit" positive>
+                      Save Changes
+                    </Button>
                     <Divider hidden />
+                    <Button
+                      content="Edit Flashcards"
+                      icon="right arrow"
+                      labelPosition="right"
+                    />
                   </Form>
                 )}
 
-                {/* end test */}
                 {is.empty(studyCard) ? null : is.empty(studyCard.flashcards) ? (
                   <Message negative>
                     <Message.Header>

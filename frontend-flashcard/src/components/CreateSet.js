@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React from "react";
 import { Form, Button, Divider } from "semantic-ui-react";
 
 const CreateSet = (props) => {

@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Table, Form, Button, Card } from "semantic-ui-react";
+import { Button, Card } from "semantic-ui-react";
 import EditProfile from "./EditProfile";
 
 const Profile = (props) => {

@@ -1,8 +1,9 @@
 class CardsetsController < ApplicationController
     def index
         @cardsets = Cardset.all
-        render json: @cardsets, include: [:flashcards]
+        render json: @cardsets, include: [:flashcards, :user]
         # Need to also include users - don't know how to do this ^^
+        # include: [:cardsets => {:include => :flashcards}]
     end
     
     def create

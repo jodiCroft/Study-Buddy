@@ -1,6 +1,6 @@
 import React from "react";
-import { useState, useHistory } from "react-router-dom";
-import { Button, Form, Divider } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
+import { Button, Form } from "semantic-ui-react";
 
 const SignUp = (props) => {
   const { push } = useHistory();

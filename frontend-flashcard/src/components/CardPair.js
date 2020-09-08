@@ -1,13 +1,6 @@
 import React, { Component, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Table,
-  Form,
-  Button,
-  Grid,
-  Message,
-  TextArea,
-} from "semantic-ui-react";
+import { Form, Button, TextArea } from "semantic-ui-react";
 
 const CardPair = (props) => {
   return (

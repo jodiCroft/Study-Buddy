@@ -8,7 +8,7 @@ import MyIndex from "./MyIndex";
 import SignUp from "./SignUp";
 import Browse from "./Browse";
 import Profile from "./Profile";
-import { Route, withRouter, useParams, useHistory } from "react-router-dom";
+import { Route, withRouter, useHistory } from "react-router-dom";
 
 import "../App.css";
 
@@ -113,7 +113,7 @@ const App = (props) => {
   };
 
   return (
-    <div>
+    <div className="App">
       <Header currentUser={currentUser} handleLogout={handleLogout} />
       <Route
         path="/home"

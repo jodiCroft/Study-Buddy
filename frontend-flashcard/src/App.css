@@ -1,7 +1,33 @@
 .App {
-  text-align: center;
+  padding: 10px 50px;
+  background-color: rgb(255, 255, 255);
+}
+
+.IntroText {
+  margin: 5px 100px;
+  font-size: 25px;
+  color: #0c1248;
+}
+
+.HomeContainer {
+  align-content: center;
+  padding: 5px 40px;
+}
+
+.StudyAnything {
+  font-size: 50px;
+  color: #0c1248;
+}
+
+.Header {
+  font-size: 30px;
 }
 
 .CardContainer {
   display: grid 1fr 1fr;
+}
+
+.study-cards {
+  height: 200px;
+  perspective: 1000px;
 }

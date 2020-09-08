@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import { Table, Button, Form, Container, Grid } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 import CardPair from "./CardPair";
 import SavedPair from "./SavedPair";
 
@@ -10,13 +10,6 @@ const CardsContainer = (props) => {
   const [savedPairs, setSavedPairs] = useState([]);
 
   const params = useParams();
-
-  // const cancelCardset = () => {
-  //   fetch(`http://localhost:3000/cardsets/${params.id}`, {
-  //     method: "DELETE",
-  //     headers: { "Content-Type": "application/json" },
-  //   });
-  // };
 
   const saveCardPair = (e) => {
     e.preventDefault();
@@ -47,14 +40,7 @@ const CardsContainer = (props) => {
       <Grid columns={2} divided>
         <Grid.Row>
           <Grid.Column>
-            <CardPair
-              // cardPair={cardPair}
-              key={Math.random()}
-              // saveText={saveText}
-              // saveFrontText={saveFrontText}
-              // saveBackText={saveBackText}
-              saveCardPair={saveCardPair}
-            />
+            <CardPair key={Math.random()} saveCardPair={saveCardPair} />
           </Grid.Column>
           {savedPairs.length === 0 ? null : (
             <Grid.Column>

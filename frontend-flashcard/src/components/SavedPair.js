@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Card, Button } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 
 const SavedCards = (props) => {
   const { push } = useHistory();

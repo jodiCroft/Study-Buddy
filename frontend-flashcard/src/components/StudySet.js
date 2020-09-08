@@ -1,26 +1,13 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Table, Form, Button, Card } from "semantic-ui-react";
+import { Button, Card } from "semantic-ui-react";
 
 const StudySet = (props) => {
   const params = useParams();
   const [front, setFront] = useState(true);
-  // const [index, setIndex] = useState(0);
+
   const flashcards = props.studyCard.flashcards;
   const index = props.index;
-
-  // const handleNext = () => {
-  //   setFront(true);
-  //   const newIndex = index + 1;
-  //   setIndex(
-  //     newIndex > flashcards.length - 1 ? flashcards.length - 1 : newIndex
-  //   );
-  // };
-
-  // const handleBack = () => {
-  //   setFront(true);
-  //   setIndex(index === 0 ? 0 : index - 1);
-  // };
 
   return (
     <div>
@@ -29,7 +16,7 @@ const StudySet = (props) => {
       <i>{front === true ? "Front" : "Back"}</i>
 
       {
-        <Card onClick={() => setFront(!front)}>
+        <Card onClick={() => setFront(!front)} className="study-cards">
           <Card.Content>
             <Card.Description>
               {front === true

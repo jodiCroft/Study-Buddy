@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
 import is from "is_js";
 import { useHistory } from "react-router-dom";
-import {
-  Button,
-  Form,
-  Divider,
-  Card,
-  Message,
-  Grid,
-  Input,
-} from "semantic-ui-react";
+import { Card, Message, Grid, Input, Icon } from "semantic-ui-react";
 import StudySet from "./StudySet";
 
 const Browse = (props) => {
   const { push } = useHistory();
   const [allCardsets, setAllCardsets] = useState([]);
   const [studyCard, setStudyCard] = useState({});
-  //   const [front, setFront] = useState(true);
-  //   const [index, setIndex] = useState(0);
+
   const [search, setSearch] = useState("");
   const [index, setIndex] = useState(0);
   const flashcards = studyCard.flashcards;
@@ -41,7 +32,6 @@ const Browse = (props) => {
   };
 
   const handleNext = () => {
-    // setFront(true);
     const newIndex = index + 1;
     setIndex(
       newIndex > flashcards.length - 1 ? flashcards.length - 1 : newIndex
@@ -49,13 +39,11 @@ const Browse = (props) => {
   };
 
   const handleBack = () => {
-    // setFront(true);
     setIndex(index === 0 ? 0 : index - 1);
   };
 
   return (
     <div>
-      {/* STaRt TEST */}
       <div>
         <Grid columns={2} divided>
           <Grid.Row>
@@ -69,6 +57,8 @@ const Browse = (props) => {
                   placeholder="subject, title or description"
                 />
               </div>
+              <br></br>
+              <br></br>
 
               {allCardsets
                 .filter((card) => {
@@ -79,19 +69,38 @@ const Browse = (props) => {
                   );
                 })
                 .map((cardset) => (
-                  <Card
-                    key={cardset.id}
-                    onClick={() => {
-                      setStudyCard(cardset);
-                      setIndex(0);
-                    }}
-                  >
-                    <Card.Content>
-                      <Card.Header>{cardset.title}</Card.Header>
-                      <Card.Description>{cardset.subject}</Card.Description>
-                      <Card.Description>{cardset.description}</Card.Description>
-                    </Card.Content>
-                  </Card>
+                  <div>
+                    <Card.Group itemsPerRow={2}>
+                      <Card
+                        key={cardset.id}
+                        onClick={() => {
+                          setStudyCard(cardset);
+                          setIndex(0);
+                        }}
+                      >
+                        <Card.Content>
+                          <Card.Header>{cardset.title}</Card.Header>
+                          <Card.Description>{cardset.subject}</Card.Description>
+                          <Card.Description>
+                            {cardset.description}
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                          <Icon name="user" />
+                          <i>
+                            by:{" "}
+                            {!cardset.user
+                              ? "deleted user"
+                              : cardset.user.username}
+                          </i>
+                        </Card.Content>
+                      </Card>
+                    </Card.Group>
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                  </div>
                 ))}
             </Grid.Column>
 
@@ -114,8 +123,6 @@ const Browse = (props) => {
           </Grid.Row>
         </Grid>
       </div>
-
-      {/* End Test */}
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { Table, Form, Button, Card } from "semantic-ui-react";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { Form, Button } from "semantic-ui-react";
 
 const EditProfile = (props) => {
   const params = useParams();
@@ -23,7 +23,6 @@ const EditProfile = (props) => {
       .then((res) => res.json())
       .then((user) => props.setCurrentUser(user))
       .then(props.setEdit(false));
-    // .then(user => this.setState({currentUser:user.user}))
   };
 
   return (
