@@ -156,6 +156,7 @@ const MyIndex = (props) => {
                         name="subject"
                       />
                       <Form.TextArea
+                        className="EditTextArea"
                         label="Description"
                         defaultValue={currentCardset.description}
                         name="description"

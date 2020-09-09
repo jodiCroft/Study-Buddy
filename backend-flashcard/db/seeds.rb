@@ -11,7 +11,7 @@ require 'faker'
 30.times do
     username = Faker::FunnyName.name.gsub(/\s+/, '')
     User.create(
-        first_name: Faker::Name.first_name , last_name: Faker::Name.last_name , username: username , password: "password"
+        first_name: Faker::Name.first_name , last_name: Faker::Name.last_name , username: username , password: "Flatiron2020"
     )
 end
 
@@ -24,7 +24,7 @@ end
 
 500.times do
     cardset_id = rand(1..100)
-    Flashcard.create(front: Faker::Hipster.sentence(word_count: 6), back: Faker::ChuckNorris.fact, cardset_id: cardset_id)
+    Flashcard.create(front: Faker::Hipster.sentence(word_count: 8), back: Faker::ChuckNorris.fact, cardset_id: cardset_id)
 end
 
 

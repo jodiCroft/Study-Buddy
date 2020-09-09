@@ -1,22 +1,40 @@
-.App {
+/* .App {
   padding: 10px 50px;
   background-color: rgb(255, 255, 255);
-}
+} */
 
 .IntroText {
-  margin: 5px 100px;
+  margin: 5px 300px;
   font-size: 25px;
-  color: #0c1248;
+  color: whiteSmoke;
+}
+
+.HomeBackground {
+  background: url("https://i.imgur.com/u05P8lh.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
 }
 
 .HomeContainer {
   align-content: center;
-  padding: 5px 40px;
+  padding: 5px 20px;
+  background-color: whiteSmoke;
+  position: fixed;
+  height: 100%;
+  width: 100%;
 }
 
 .StudyAnything {
-  font-size: 50px;
-  color: #0c1248;
+  font-size: 60px;
+
+  color: whiteSmoke;
+  width: 100%;
+}
+
+.ui.massive.positive.button.CreateButton {
+  box-shadow: 5px 5px 10px whiteSmoke;
 }
 
 .CreateSet {

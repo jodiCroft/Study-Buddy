@@ -11,11 +11,13 @@ const CardPair = (props) => {
       <Form onSubmit={(e) => props.saveCardPair(e)}>
         <TextArea
           className="BlankCard"
-          style={{ minHeight: 190 }}
+          style={{ minHeight: 190, fontSize: 25 }}
           placeholder="front card text"
           name="frontText"
           required="true"
         ></TextArea>
+        <br></br>
+        <br></br>
         <br></br>
         <div>
           <h3>Back:</h3>
@@ -23,7 +25,7 @@ const CardPair = (props) => {
 
         <TextArea
           className="BlankCard"
-          style={{ minHeight: 190 }}
+          style={{ minHeight: 190, fontSize: 25 }}
           placeholder="back card text"
           name="backText"
           required="true"

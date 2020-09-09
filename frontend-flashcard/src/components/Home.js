@@ -7,10 +7,9 @@ const Home = (props) => {
   return (
     <div className="HomeContainer">
       <div className="HomeContent">
-        <Segment align="center">
-          <p className="StudyAnything">
-            <i>Study Anything!</i>
-          </p>
+        <div align="center" className="HomeBackground">
+          <br></br>
+          <p className="StudyAnything">Study Anything!</p>
           <div className="IntroText">
             <p>
               Use Study Buddy to create your own flashcard sets. If you are
@@ -18,7 +17,8 @@ const Home = (props) => {
               library of flashcard sets created by people just like you!
             </p>
           </div>
-          <Divider section />
+          <br></br>
+          <br></br>
 
           <Button
             className="CreateButton"
@@ -30,8 +30,9 @@ const Home = (props) => {
           </Button>
           <br></br>
           <br></br>
-        </Segment>
-        <Segment align="center">
+          <br></br>
+        </div>
+        <div align="center">
           <br></br>
 
           <div>
@@ -56,17 +57,17 @@ const Home = (props) => {
           <br></br>
           <br></br>
           <br></br>
-        </Segment>
+        </div>
       </div>
 
-      <Segment className="Footer" align="center">
+      <div className="Footer" align="center">
         <br></br>
         <Statistic>
           <Statistic.Value>5,550</Statistic.Value>
           <Statistic.Label>Flashcard Sets Created!</Statistic.Label>
         </Statistic>
         <br></br>
-      </Segment>
+      </div>
     </div>
   );
 };

@@ -76,6 +76,7 @@ const Browse = (props) => {
                         onClick={() => {
                           setStudyCard(cardset);
                           setIndex(0);
+                          window.scrollTo(0, 0);
                         }}
                       >
                         <Card.Content>

@@ -115,42 +115,47 @@ const App = (props) => {
   return (
     <div className="App">
       <Header currentUser={currentUser} handleLogout={handleLogout} />
-      <Route
-        path="/home"
-        component={() => <Home currentUser={currentUser} />}
-      />
+      <div className="MainContainer">
+        <Route
+          path="/home"
+          component={() => <Home currentUser={currentUser} />}
+        />
 
-      <Route
-        path="/sign-up"
-        component={() => <SignUp currentUser={currentUser} signUp={signUp} />}
-      />
+        <Route
+          path="/sign-up"
+          component={() => <SignUp currentUser={currentUser} signUp={signUp} />}
+        />
 
-      <Route
-        path="/login"
-        component={() => <Login handleLogin={handleLogin} />}
-      />
+        <Route
+          path="/login"
+          component={() => <Login handleLogin={handleLogin} />}
+        />
 
-      <Route
-        path="/my-index"
-        component={() => <MyIndex currentUser={currentUser} />}
-      />
+        <Route
+          path="/my-index"
+          component={() => <MyIndex currentUser={currentUser} />}
+        />
 
-      <Route path="/browse" component={() => <Browse />} />
+        <Route path="/browse" component={() => <Browse />} />
 
-      <Route
-        path="/cardset/create"
-        component={() => <CreateSet createCardSet={createCardSet} />}
-      />
-      <Route
-        path={`/cardset/:id/createcards`}
-        component={() => <CardsContainer />}
-      />
-      <Route
-        path={`/user/:id/profile`}
-        component={() => (
-          <Profile currentUser={currentUser} setCurrentUser={setCurrentUser} />
-        )}
-      />
+        <Route
+          path="/cardset/create"
+          component={() => <CreateSet createCardSet={createCardSet} />}
+        />
+        <Route
+          path={`/cardset/:id/createcards`}
+          component={() => <CardsContainer />}
+        />
+        <Route
+          path={`/user/:id/profile`}
+          component={() => (
+            <Profile
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          )}
+        />
+      </div>
     </div>
   );
 };
