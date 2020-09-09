@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { Button, Segment, Statistic, Divider } from "semantic-ui-react";
+import { Button, Segment, Statistic, Image } from "semantic-ui-react";
 const Home = (props) => {
   const { push } = useHistory();
   return (
@@ -9,7 +9,9 @@ const Home = (props) => {
       <div className="HomeContent">
         <div align="center" className="HomeBackground">
           <br></br>
-          <p className="StudyAnything">Study Anything!</p>
+
+          <h2 className="StudyAnything">Study Anything!</h2>
+
           <div className="IntroText">
             <p>
               Use Study Buddy to create your own flashcard sets. If you are
@@ -32,40 +34,43 @@ const Home = (props) => {
           <br></br>
           <br></br>
         </div>
-        <div align="center">
+        <div align="center" className="BrowseButtons">
           <br></br>
 
           <div>
-            <h2>
-              <i>Browse by Subject...</i>
-            </h2>
+            <br></br>
+            <br></br>
+
+            <i className="BrowseText">Browse by Subject...</i>
           </div>
           <br></br>
 
-          <Button color="violet" size="massive">
+          <Button className="SubjectButton" size="massive">
             Biology
           </Button>
-          <Button color="violet" size="massive">
+          <Button className="SubjectButton" size="massive">
             Math
           </Button>
-          <Button color="violet" size="massive">
+          <Button className="SubjectButton" size="massive">
             Spanish
           </Button>
-          <Button color="violet" size="massive">
+          <Button className="SubjectButton" size="massive">
             Other
           </Button>
           <br></br>
           <br></br>
           <br></br>
+          <br></br>
+          <br></br>
         </div>
+      </div>
+      <div align="center">
+        <Image className="Testimonials" src="https://i.imgur.com/VSlSpUU.png" />
       </div>
 
       <div className="Footer" align="center">
         <br></br>
-        <Statistic>
-          <Statistic.Value>5,550</Statistic.Value>
-          <Statistic.Label>Flashcard Sets Created!</Statistic.Label>
-        </Statistic>
+
         <br></br>
       </div>
     </div>

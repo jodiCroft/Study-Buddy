@@ -43,19 +43,22 @@ const Browse = (props) => {
   };
 
   return (
-    <div>
+    <div className="BrowseContainer">
       <div>
         <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column>
-              <h1>Click on any cardset to study it!</h1>
-              <div>
-                <Input
-                  onChange={(e) => handleSearch(e)}
-                  size="big"
-                  icon="search"
-                  placeholder="subject, title or description"
-                />
+              <br></br>
+              <div align="center">
+                <h1>Click on any cardset to study it!</h1>
+                <div>
+                  <Input
+                    onChange={(e) => handleSearch(e)}
+                    size="big"
+                    icon="search"
+                    placeholder="subject, title or description"
+                  />
+                </div>
               </div>
               <br></br>
               <br></br>
@@ -70,8 +73,9 @@ const Browse = (props) => {
                 })
                 .map((cardset) => (
                   <div>
-                    <Card.Group itemsPerRow={2}>
+                    <div align="center">
                       <Card
+                        className="BrowseCard"
                         key={cardset.id}
                         onClick={() => {
                           setStudyCard(cardset);
@@ -81,7 +85,10 @@ const Browse = (props) => {
                       >
                         <Card.Content>
                           <Card.Header>{cardset.title}</Card.Header>
-                          <Card.Description>{cardset.subject}</Card.Description>
+                          <Card.Description>
+                            <i>{cardset.subject}</i>
+                          </Card.Description>
+                          <br></br>
                           <Card.Description>
                             {cardset.description}
                           </Card.Description>
@@ -96,8 +103,7 @@ const Browse = (props) => {
                           </i>
                         </Card.Content>
                       </Card>
-                    </Card.Group>
-
+                    </div>
                     <br></br>
                     <br></br>
                     <br></br>
@@ -105,7 +111,9 @@ const Browse = (props) => {
                 ))}
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column align="center">
+              <br></br>
+              <br></br>
               {is.empty(studyCard) ? null : is.empty(studyCard.flashcards) ? (
                 <Message negative>
                   <Message.Header>

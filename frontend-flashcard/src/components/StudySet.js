@@ -16,7 +16,7 @@ const StudySet = (props) => {
       <i>{front === true ? "Front" : "Back"}</i>
 
       {
-        <Card onClick={() => setFront(!front)} className="study-cards">
+        <Card onClick={() => setFront(!front)} className="StudyCards">
           <Card.Content>
             <Card.Description align="middle" as="h2">
               {front === true

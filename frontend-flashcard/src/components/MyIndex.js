@@ -94,104 +94,129 @@ const MyIndex = (props) => {
           </Button>
         </div>
       ) : (
-        <div>
-          <Grid columns={2} divided>
-            <Grid.Row>
-              <Grid.Column>
-                <h1>Click on a cardset to study it!</h1>
-
-                <Button onClick={() => setShowOptions(!showOptions)}>
-                  {showOptions === true ? "Finished Editing" : "Edit Cardsets"}
-                </Button>
-                <br></br>
-                <br></br>
-                <br></br>
-
-                {myCardsets.map((cardset) => (
-                  <div>
-                    <Card
-                      key={cardset.id}
-                      onClick={() => setStudyCard(cardset)}
-                    >
-                      <Card.Content>
-                        <Card.Header>{cardset.title}</Card.Header>
-                        <Card.Description>{cardset.subject}</Card.Description>
-                        <Card.Description>
-                          {cardset.description}
-                        </Card.Description>
-                      </Card.Content>
-                    </Card>
-                    <div>
-                      {showOptions === true ? (
-                        <Button.Group>
-                          <Button onClick={() => setCurrentCardset(cardset)}>
-                            Edit
-                          </Button>
-                          <Button.Or />
-                          <Button negative>Delete</Button>
-                        </Button.Group>
-                      ) : null}
-                    </div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+        <div className="BrowseContainer">
+          <div>
+            <Grid columns={2} divided>
+              <Grid.Row>
+                <Grid.Column>
+                  <br></br>
+                  <div align="center">
+                    <h1>Click on a cardset to study it!</h1>
                   </div>
-                ))}
-              </Grid.Column>
-
-              <Grid.Column>
-                {is.empty(currentCardset) ? null : (
-                  <Form size="big" onSubmit={(e) => updateCardset(e)}>
-                    <Form.Group widths="equal">
-                      <Form.Field
-                        label="Cardset title"
-                        control="input"
-                        name="title"
-                        defaultValue={currentCardset.title}
-                      />
-                      <Form.Field
-                        label="Subject"
-                        control="input"
-                        defaultValue={currentCardset.subject}
-                        name="subject"
-                      />
-                      <Form.TextArea
-                        className="EditTextArea"
-                        label="Description"
-                        defaultValue={currentCardset.description}
-                        name="description"
-                      />
-                    </Form.Group>
-
-                    <Button type="submit" positive>
-                      Save Changes
-                    </Button>
-                    <Divider hidden />
+                  <br></br>
+                  <div align="center">
                     <Button
-                      content="Edit Flashcards"
-                      icon="right arrow"
-                      labelPosition="right"
-                    />
-                  </Form>
-                )}
+                      className="EditButton"
+                      onClick={() => setShowOptions(!showOptions)}
+                    >
+                      {showOptions === true
+                        ? "Finished Editing"
+                        : "Edit Cardsets"}
+                    </Button>
+                  </div>
+                  <br></br>
+                  <br></br>
+                  <br></br>
 
-                {is.empty(studyCard) ? null : is.empty(studyCard.flashcards) ? (
-                  <Message negative>
-                    <Message.Header>
-                      No flashcards in this set to display
-                    </Message.Header>
-                  </Message>
-                ) : (
-                  <StudySet
-                    studyCard={studyCard}
-                    index={index}
-                    handleBack={handleBack}
-                    handleNext={handleNext}
-                  />
-                )}
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+                  {myCardsets.map((cardset) => (
+                    <div>
+                      <div align="center">
+                        <Card
+                          className="BrowseCard"
+                          key={cardset.id}
+                          onClick={() => {
+                            setStudyCard(cardset);
+                            window.scrollTo(0, 0);
+                          }}
+                        >
+                          <Card.Content>
+                            <Card.Header>{cardset.title}</Card.Header>
+                            <Card.Description>
+                              <i>{cardset.subject}</i>v
+                            </Card.Description>
+                            <br></br>
+                            <Card.Description>
+                              {cardset.description}
+                            </Card.Description>
+                          </Card.Content>
+                        </Card>
+                      </div>
+                      <div align="center">
+                        {showOptions === true ? (
+                          <Button.Group>
+                            <Button onClick={() => setCurrentCardset(cardset)}>
+                              Edit
+                            </Button>
+                            <Button.Or />
+                            <Button negative>Delete</Button>
+                          </Button.Group>
+                        ) : null}
+                      </div>
+                      <br></br>
+                      <br></br>
+                      <br></br>
+                    </div>
+                  ))}
+                </Grid.Column>
+
+                <Grid.Column align="center">
+                  <br></br>
+                  {is.empty(currentCardset) ? null : (
+                    <Form size="big" onSubmit={(e) => updateCardset(e)}>
+                      <Form.Group widths="equal">
+                        <Form.Field
+                          label="Cardset title"
+                          control="input"
+                          name="title"
+                          defaultValue={currentCardset.title}
+                        />
+                        <Form.Field
+                          label="Subject"
+                          control="input"
+                          defaultValue={currentCardset.subject}
+                          name="subject"
+                        />
+                        <Form.TextArea
+                          className="EditTextArea"
+                          label="Description"
+                          defaultValue={currentCardset.description}
+                          name="description"
+                        />
+                      </Form.Group>
+
+                      <Button type="submit" positive size="large">
+                        Save Changes
+                      </Button>
+                      <Divider hidden />
+                      <Button
+                        className="EditFlashcardsButton"
+                        content="Edit Flashcards"
+                        icon="right arrow"
+                        labelPosition="right"
+                      />
+                    </Form>
+                  )}
+
+                  {is.empty(studyCard) ? null : is.empty(
+                      studyCard.flashcards
+                    ) ? (
+                    <Message negative>
+                      <Message.Header>
+                        No flashcards in this set to display
+                      </Message.Header>
+                    </Message>
+                  ) : (
+                    <StudySet
+                      studyCard={studyCard}
+                      index={index}
+                      handleBack={handleBack}
+                      handleNext={handleNext}
+                    />
+                  )}
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </div>
         </div>
       )}
     </div>
