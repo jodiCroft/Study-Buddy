@@ -3,7 +3,9 @@ import { Form, Button, Divider } from "semantic-ui-react";
 
 const CreateSet = (props) => {
   return (
-    <div>
+    <div className="CreateSet">
+      <br></br>
+      <br></br>
       <div>
         <Form
           size="massive"

@@ -19,6 +19,19 @@
   color: #0c1248;
 }
 
+.CreateSet {
+  padding: 5px 40px;
+}
+
+.ui.form textarea.BlankCard {
+  outline: none;
+  resize: none;
+}
+
+.CardText {
+  align-content: center;
+}
+
 .Header {
   font-size: 30px;
 }

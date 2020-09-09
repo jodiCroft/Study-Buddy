@@ -12,15 +12,23 @@ const SavedCards = (props) => {
       <Card.Group>
         <Card>
           <Card.Content>
-            <Card.Meta>Front</Card.Meta>
-            <Card.Description>{props.pair.front}</Card.Description>
+            <Card.Meta>
+              <i>Front</i>
+            </Card.Meta>
+            <Card.Description align="center">
+              {props.pair.front}
+            </Card.Description>
           </Card.Content>
         </Card>
 
         <Card>
           <Card.Content>
-            <Card.Meta>Back</Card.Meta>
-            <Card.Description>{props.pair.back}</Card.Description>
+            <Card.Meta>
+              <i>Back</i>
+            </Card.Meta>
+            <Card.Description align="center">
+              {props.pair.back}
+            </Card.Description>
           </Card.Content>
         </Card>
       </Card.Group>

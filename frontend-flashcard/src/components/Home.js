@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { Button, Segment, Header, Divider } from "semantic-ui-react";
+import { Button, Segment, Statistic, Divider } from "semantic-ui-react";
 const Home = (props) => {
   const { push } = useHistory();
   return (
@@ -28,15 +28,16 @@ const Home = (props) => {
           >
             Create a Flashcard Set
           </Button>
+          <br></br>
+          <br></br>
         </Segment>
         <Segment align="center">
           <br></br>
-          <br></br>
 
           <div>
-            <h3>
+            <h2>
               <i>Browse by Subject...</i>
-            </h3>
+            </h2>
           </div>
           <br></br>
 
@@ -52,8 +53,20 @@ const Home = (props) => {
           <Button color="violet" size="massive">
             Other
           </Button>
+          <br></br>
+          <br></br>
+          <br></br>
         </Segment>
       </div>
+
+      <Segment className="Footer" align="center">
+        <br></br>
+        <Statistic>
+          <Statistic.Value>5,550</Statistic.Value>
+          <Statistic.Label>Flashcard Sets Created!</Statistic.Label>
+        </Statistic>
+        <br></br>
+      </Segment>
     </div>
   );
 };
