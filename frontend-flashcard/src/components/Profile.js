@@ -23,33 +23,39 @@ const Profile = (props) => {
   };
 
   return (
-    <div>
-      <h3>{`Welcome to your profile, ${props.currentUser.first_name}`}</h3>
-      <Card size="massive">
-        <Card.Content>
-          <b>Name: </b>
-          {fullName}
-        </Card.Content>
-        <Card.Content>
-          <b>Username: </b>
-          {props.currentUser.username}
-        </Card.Content>
-        <Card.Content>
-          <b>Password: </b>
-          {"********"}
-        </Card.Content>
-        <Button.Group>
-          <Button positive onClick={() => setEdit(true)}>
-            Edit
-          </Button>
-          <Button.Or />
-          <Button negative onClick={() => handleDelete()}>
-            Delete Account
-          </Button>
-        </Button.Group>
-      </Card>
+    <div className="ProfPage" align="center">
+      <br></br>
+      <br></br>
+      <h1>{`Welcome to your profile, ${props.currentUser.first_name}`}</h1>
+      <div className="ProfileForm">
+        <Card size="massive" className="ProfileForm">
+          <Card.Content align="left">
+            <b>Name: </b>
+            {fullName}
+          </Card.Content>
+          <Card.Content align="left">
+            <b>Username: </b>
+            {props.currentUser.username}
+          </Card.Content>
+          <Card.Content align="left">
+            <b>Password: </b>
+            {"********"}
+          </Card.Content>
+          <Button.Group>
+            <Button positive onClick={() => setEdit(true)}>
+              Edit
+            </Button>
+            <Button.Or />
+            <Button negative onClick={() => handleDelete()}>
+              Delete Account
+            </Button>
+          </Button.Group>
+        </Card>
+      </div>
+      <br></br>
+      <br></br>
       {edit ? (
-        <div>
+        <div align="center">
           <EditProfile
             edit={edit}
             setEdit={setEdit}

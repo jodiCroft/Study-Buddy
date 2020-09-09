@@ -6,19 +6,23 @@ const Home = (props) => {
   const { push } = useHistory();
   return (
     <div className="HomeContainer">
+      <br></br>
       <div className="HomeContent">
         <div align="center" className="HomeBackground">
           <br></br>
 
           <h2 className="StudyAnything">Study Anything!</h2>
-
+          <br></br>
           <div className="IntroText">
             <p>
-              Use Study Buddy to create your own flashcard sets. If you are
-              looking for a subject to study, browse or search our extensive
-              library of flashcard sets created by people just like you!
+              <b>
+                Use Study Buddy to create your own flashcard sets. If you are
+                looking for a subject to study, browse or search our extensive
+                library of flashcard sets created by people just like you!
+              </b>
             </p>
           </div>
+          <br></br>
           <br></br>
           <br></br>
 
@@ -30,6 +34,7 @@ const Home = (props) => {
           >
             Create a Flashcard Set
           </Button>
+          <br></br>
           <br></br>
           <br></br>
           <br></br>

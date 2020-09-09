@@ -10,23 +10,23 @@ const SavedCards = (props) => {
   return (
     <div>
       <Card.Group>
-        <Card>
+        <Card className="SavedCard">
           <Card.Content>
             <Card.Meta>
               <i>Front</i>
             </Card.Meta>
-            <Card.Description align="center">
+            <Card.Description align="center" as="h3">
               {props.pair.front}
             </Card.Description>
           </Card.Content>
         </Card>
 
-        <Card>
+        <Card className="SavedCard">
           <Card.Content>
             <Card.Meta>
               <i>Back</i>
             </Card.Meta>
-            <Card.Description align="center">
+            <Card.Description align="center" as="h3">
               {props.pair.back}
             </Card.Description>
           </Card.Content>

@@ -30,7 +30,8 @@ const CardPair = (props) => {
           name="backText"
           required="true"
         ></TextArea>
-
+        <br></br>
+        <br></br>
         <Button positive icon="right arrow" type="submit" />
       </Form>
     </div>

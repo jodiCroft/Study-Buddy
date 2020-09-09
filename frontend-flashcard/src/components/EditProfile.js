@@ -26,10 +26,10 @@ const EditProfile = (props) => {
   };
 
   return (
-    <div>
-      <h1>Edit your username or password</h1>
-      <Form size="big" onSubmit={(e) => updateProfile(e)}>
-        <Form.Group>
+    <div align="left">
+      <h1>Edit your username or password:</h1>
+      <Form align="left" size="big" onSubmit={(e) => updateProfile(e)}>
+        <Form.Group align="left">
           <Form.Field
             label="Username"
             name="username"

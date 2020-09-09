@@ -37,25 +37,30 @@ const CardsContainer = (props) => {
 
   return (
     <div>
-      <Grid columns={2} divided>
-        <Grid.Row>
-          <Grid.Column>
-            <CardPair key={Math.random()} saveCardPair={saveCardPair} />
-          </Grid.Column>
-          {savedPairs.length === 0 ? null : (
+      <div className="CreateCardsContainer">
+        <Grid columns={2} divided>
+          <Grid.Row>
             <Grid.Column>
-              <h1>Your Cards</h1>
-              {savedPairs.map((pair) => (
-                <SavedPair pair={pair} key={Math.random()} />
-              ))}
               <br></br>
-              <Button size="large" positive onClick={() => push("/my-index")}>
-                Save!
-              </Button>
+              <br></br>
+              <CardPair key={Math.random()} saveCardPair={saveCardPair} />
             </Grid.Column>
-          )}
-        </Grid.Row>
-      </Grid>
+            {savedPairs.length === 0 ? null : (
+              <Grid.Column>
+                <br></br>
+                <h1>Your Cards</h1>
+                {savedPairs.map((pair) => (
+                  <SavedPair pair={pair} key={Math.random()} />
+                ))}
+                <br></br>
+                <Button size="large" positive onClick={() => push("/my-index")}>
+                  Save!
+                </Button>
+              </Grid.Column>
+            )}
+          </Grid.Row>
+        </Grid>
+      </div>
     </div>
   );
 };

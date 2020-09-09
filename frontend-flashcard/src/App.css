@@ -4,8 +4,8 @@
 } */
 
 .IntroText {
-  margin: 5px 300px;
-  font-size: 25px;
+  margin: 5px 250px;
+  font-size: 30px;
   color: whiteSmoke;
 }
 
@@ -40,6 +40,8 @@
 
 .ui.massive.positive.button.CreateButton {
   box-shadow: 5px 5px 10px whiteSmoke;
+  height: 80px;
+  font-size: 30px;
 }
 
 .ui.massive.button.SubjectButton {
@@ -48,8 +50,9 @@
   box-shadow: 5px 5px 10px rgb(17, 8, 45);
 }
 
-.CreateSet {
+.ui.form.CreateSet {
   padding: 5px 40px;
+  background-color: whitesmoke;
 }
 
 .ui.form textarea.BlankCard {
@@ -80,8 +83,9 @@
   width: 500px;
 }
 
-.Header {
-  font-size: 30px;
+.ui.secondary.menu {
+  font-size: 18px;
+  padding: 1px 40px;
 }
 
 .CardContainer {
@@ -94,6 +98,12 @@
   align-content: center;
 }
 
+.ui.card.SavedCard {
+  height: 200px;
+  width: 300px;
+  align-content: center;
+}
+
 .ui.button.EditButton {
   background-color: rgb(16, 16, 81);
   color: whitesmoke;
@@ -102,4 +112,27 @@
 .ui.button.EditFlashcardsButton {
   background-color: rgb(16, 16, 81);
   color: whitesmoke;
+}
+
+.CreateCardsContainer {
+  padding: 5px 40px;
+  background-color: whitesmoke;
+  position: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.ProfPage {
+  padding: 5px 40px;
+  background-color: whitesmoke;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+}
+
+.ui.card.ProfileForm {
+  height: 300px;
+  width: 500px;
+  font-size: 20px;
 }

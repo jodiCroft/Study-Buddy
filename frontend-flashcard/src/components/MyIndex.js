@@ -132,7 +132,7 @@ const MyIndex = (props) => {
                           <Card.Content>
                             <Card.Header>{cardset.title}</Card.Header>
                             <Card.Description>
-                              <i>{cardset.subject}</i>v
+                              <i>{cardset.subject}</i>
                             </Card.Description>
                             <br></br>
                             <Card.Description>

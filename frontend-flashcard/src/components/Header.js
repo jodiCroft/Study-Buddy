@@ -10,11 +10,10 @@ const Header = (props) => {
         <Menu.Item onClick={() => push("/home")}>
           <Image src="https://i.imgur.com/Om0FWJH.png" />
         </Menu.Item>
+        <Menu.Menu position="right" className="HeaderFont">
+          <Menu.Item name="home" onClick={() => push("/home")} />
+          <Menu.Item name="browse all sets" onClick={() => push("/browse")} />
 
-        <Menu.Item name="home" onClick={() => push("/home")} />
-        <Menu.Item name="browse all sets" onClick={() => push("/browse")} />
-
-        <Menu.Menu position="right">
           {props.currentUser.id ? (
             <Menu.Item
               name="My Card Sets"

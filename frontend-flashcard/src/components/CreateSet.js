@@ -12,6 +12,8 @@ const CreateSet = (props) => {
           onSubmit={(e) => props.createCardSet(e)}
           className="CreateSet"
         >
+          <br></br>
+          <br></br>
           <Form.Group widths="equal">
             <Form.Field
               label="Cardset title"
@@ -36,7 +38,9 @@ const CreateSet = (props) => {
             />
           </Form.Group>
 
-          <Button type="submit">Submit</Button>
+          <Button type="submit" positive size="large">
+            Submit
+          </Button>
           <Divider hidden />
         </Form>
       </div>
