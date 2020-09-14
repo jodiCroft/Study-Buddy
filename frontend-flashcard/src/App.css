@@ -1,7 +1,138 @@
-.App {
-  text-align: center;
+/* .App {
+  padding: 10px 50px;
+  background-color: rgb(255, 255, 255);
+} */
+
+.IntroText {
+  margin: 5px 250px;
+  font-size: 30px;
+  color: whiteSmoke;
+}
+
+.HomeBackground {
+  background: url("https://i.imgur.com/u05P8lh.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+}
+
+.HomeContainer {
+  align-content: center;
+  padding: 5px 20px;
+  background-color: whiteSmoke;
+  /* position: fixed; */
+  height: 100%;
+  width: 100%;
+}
+
+.BrowseText {
+  font-size: 40px;
+  color: rgb(47, 34, 91);
+}
+
+.StudyAnything {
+  font-size: 60px;
+
+  color: whiteSmoke;
+  width: 100%;
+}
+
+.ui.massive.positive.button.CreateButton {
+  box-shadow: 5px 5px 10px whiteSmoke;
+  height: 80px;
+  font-size: 30px;
+}
+
+.ui.massive.button.SubjectButton {
+  background-color: rgb(16, 16, 81);
+  color: whitesmoke;
+  box-shadow: 5px 5px 10px rgb(17, 8, 45);
+}
+
+.ui.form.CreateSet {
+  padding: 5px 40px;
+  background-color: whitesmoke;
+}
+
+.ui.form textarea.BlankCard {
+  outline: none;
+  resize: none;
+}
+
+.ui.image.Testimonials {
+  border-radius: 30px;
+  height: 600px;
+}
+
+.BrowseContainer {
+  align-content: center;
+  padding: 5px 20px;
+  background-color: whiteSmoke;
+  /* position: fixed; */
+  height: 100%;
+  width: 100%;
+}
+
+.CardText {
+  align-content: center;
+}
+
+.ui.card.BrowseCard {
+  height: 200px;
+  width: 500px;
+}
+
+.ui.secondary.menu {
+  font-size: 18px;
+  padding: 1px 40px;
 }
 
 .CardContainer {
   display: grid 1fr 1fr;
+}
+
+.ui.card.StudyCards {
+  height: 200px;
+  width: 500px;
+  align-content: center;
+}
+
+.ui.card.SavedCard {
+  height: 200px;
+  width: 300px;
+  align-content: center;
+}
+
+.ui.button.EditButton {
+  background-color: rgb(16, 16, 81);
+  color: whitesmoke;
+}
+
+.ui.button.EditFlashcardsButton {
+  background-color: rgb(16, 16, 81);
+  color: whitesmoke;
+}
+
+.CreateCardsContainer {
+  padding: 5px 40px;
+  background-color: whitesmoke;
+  position: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.ProfPage {
+  padding: 5px 40px;
+  background-color: whitesmoke;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+}
+
+.ui.card.ProfileForm {
+  height: 300px;
+  width: 500px;
+  font-size: 20px;
 }

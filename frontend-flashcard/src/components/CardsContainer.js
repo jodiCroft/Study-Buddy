@@ -1,116 +1,66 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import { Table, Button, Form, Container } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 import CardPair from "./CardPair";
-import SavedCards from "./SavedCards";
+import SavedPair from "./SavedPair";
 
 const CardsContainer = (props) => {
   const { push } = useHistory();
   const [savedPairs, setSavedPairs] = useState([]);
-  const [cardPairs, setCardPairs] = useState([
-    { front: "", back: "", cardId: 0 },
-  ]);
 
   const params = useParams();
 
-  const cancelCardset = (params) => {
-    fetch(`http://localhost:3000/cardsets/${params.id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
-  };
-
-  const saveFrontText = (id, value) => {
-    cardPairs.map((cardPair) => {
-      if (cardPair.cardId === id) {
-        cardPair.front = value;
-      }
-    });
-  };
-
-  const saveBackText = (id, value) => {
-    cardPairs.map((cardPair) => {
-      if (cardPair.cardId === id) {
-        cardPair.back = value;
-      }
-    });
-  };
-
-  const saveCardPair = (cardPair) => {
-    setSavedPairs([...savedPairs, cardPair]);
-    fetch(`http://localhost:3000/cardsets/${params.id}/flashcards`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        front: cardPair.front,
-        back: cardPair.back,
-      }),
-    })
-      .then((res) => res.json())
-      .then(console.log);
-  };
-
-  const showPage = (e) => {
+  const saveCardPair = (e) => {
     e.preventDefault();
-    push(`/cardset/${params.id}/show-set`);
+
+    const cardPair = {
+      front: e.target.frontText.value,
+      back: e.target.backText.value,
+    };
+    {
+      setSavedPairs((prevSavedPairs) => [cardPair, ...prevSavedPairs]);
+
+      fetch(`http://localhost:3000/cardsets/${params.id}/flashcards`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(cardPair),
+      })
+        .then((res) => res.json())
+        .then(console.log(savedPairs));
+    }
   };
 
   return (
     <div>
-      <div>
-        <Form onSubmit={(e) => showPage(e)}>
-          <Table basic>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Front</Table.HeaderCell>
-                <Table.HeaderCell>Back</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-
-            <Table.Body>
-              <Table.Cell>
-                {cardPairs.map((cardPair) => (
-                  <CardPair
-                    cardPair={cardPair}
-                    key={Math.random()}
-                    saveFrontText={saveFrontText}
-                    saveBackText={saveBackText}
-                    saveCardPair={saveCardPair}
-                  />
+      <div className="CreateCardsContainer">
+        <Grid columns={2} divided>
+          <Grid.Row>
+            <Grid.Column>
+              <br></br>
+              <br></br>
+              <CardPair key={Math.random()} saveCardPair={saveCardPair} />
+            </Grid.Column>
+            {savedPairs.length === 0 ? null : (
+              <Grid.Column>
+                <br></br>
+                <h1>Your Cards</h1>
+                {savedPairs.map((pair) => (
+                  <SavedPair pair={pair} key={Math.random()} />
                 ))}
-              </Table.Cell>
-            </Table.Body>
-          </Table>
-
-          <div>
-            <Button
-              onClick={() =>
-                setCardPairs([
-                  ...cardPairs,
-                  { front: "", back: "", cardId: cardPairs.length },
-                ])
-              }
-            >
-              Add more
-            </Button>
-          </div>
-          <Button positive type="submit">
-            Create Cards
-          </Button>
-        </Form>
+                <br></br>
+                <Button size="large" positive onClick={() => push("/my-index")}>
+                  Save!
+                </Button>
+              </Grid.Column>
+            )}
+          </Grid.Row>
+        </Grid>
       </div>
-      <Button negative onClick={() => cancelCardset(params)}>
-        Cancel
-      </Button>
-
-      <Container>
-        <SavedCards savedPairs={savedPairs} />
-      </Container>
     </div>
   );
 };

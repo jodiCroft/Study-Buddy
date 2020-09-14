@@ -6,17 +6,28 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(first_name: "Julio", last_name: "Chazari", username: "juliooo", password: "julio" )
-Cardset.create(
-    title: "English 101", subject: "English", access: "public", description: "Basic test prep flashcards for English101"
-)
-Flashcard.create([
-    {front: "Summary" ,back: "shows an understanding of a work's main ideas and the relationships among those ideas" , cardset_id: 1 },
-    {front: "subject-verb agreement" ,back: "subject and verb -both plural or singular, verb must agree with subject" , cardset_id: 1 },
-    {front: "pronoun",back: "4 types pronouns (replaces noun) Subject, object, possessive and demonstrative" , cardset_id: 1 },
-    {front: "Run on sentence",back: "compound sentences having multiple ideas that is not seperated or punctuated correctly" ,hint: "compound sentences having multiple ideas that is not seperated or punctuated correctly." , cardset_id: 1 }
-])
+require 'faker'
 
-UserCardset.create(
-    user_id: 1, cardset_id: 1
-)
+30.times do
+    username = Faker::FunnyName.name.gsub(/\s+/, '')
+    User.create(
+        first_name: Faker::Name.first_name , last_name: Faker::Name.last_name , username: username , password: "Flatiron2020"
+    )
+end
+
+
+100.times do
+    user_id = rand(1..30)
+    Cardset.create(user_id: user_id  , title: Faker::Educator.course_name , subject: Faker::Educator.subject , access: "public", description: Faker::Hacker.say_something_smart)
+end
+
+
+500.times do
+    cardset_id = rand(1..100)
+    Flashcard.create(front: Faker::Hipster.sentence(word_count: 8), back: Faker::ChuckNorris.fact, cardset_id: cardset_id)
+end
+
+
+
+
+
